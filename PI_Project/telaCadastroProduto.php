@@ -10,6 +10,7 @@
         
     </head>
     <body>
+        <button type="button" class="btn btn-danger p-1 m-1" onclick="window.location.href='options.php'">Voltar</button>
         <div class="container text-center pt-5 mb-5">
             <h1>Cadastrar Produto</h1>
         </div>
@@ -18,7 +19,7 @@
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-            <input class="form-control" type="text" name="descProduto" placeholder="Nome do fornecedor" required>
+            <input class="form-control" type="text" name="descProduto" placeholder="Descrição do produto" required>
             <label for="">Descrição do produto</label>
             </div>
             </div>
@@ -26,20 +27,19 @@
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-            <input class="form-control" type="text" onkeypress="return /[0-11]/i.test(event.key)" name="codBarra" placeholder="CNPJ">
+            <input class="form-control" type="text" onkeypress="return /[0-9]/i.test(event.key)" name="codBarra" placeholder="codBarra" maxlength="13">
             <label for="">Código de Barra</label>
             </div>
             </div>
                 <div class="col">
                     <div class="form-floating mb-3">
-            <input class="form-control" type="text" name="categoria" list="typeUserList" onkeypress="return /[0-9]/i.test(event.key)" maxlength="11" placeholder="CPF">
-            <label for="">Categoria</label>
-            <datalist id="typeUserList">
-                    <option value="Arroz">  
-                    <option value="Feijão">
-                    <option value="Vassoura">
-                    <option value="iogurte">
-                </datalist>
+            <select class="form-select" name="categoria">
+                    <option value="Arroz">Arroz  
+                    <option value="Feijão">Feijão
+                    <option value="Vassoura">Vassoura
+                    <option value="iogurte">Iogurte
+                    </select>
+                    <label for="">Categoria</label>
             </div>
             </div>
             </div>
