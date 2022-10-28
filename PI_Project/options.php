@@ -9,13 +9,15 @@
         <title>Tela Inicial</title>
     </head>
 <body>
-<h2>Gerenciador de Estoque</h2>
-<li><a href="listaFornecedores.php">Fornecedores</a></li>
-<li><a href="listaUsuarios.php">Usuários</a></li> 
-<li><a href="listaProdutos.php">Produtos</a></li> 
-<li><a href="listaPedidos.php">Pedidos</a></li>
-<li><a href="Nightlife.html">Estoque</a></li>
-<li><a href="Nightlife.html">Relatórios</a></li>
-
+    <button type="button" class="btn btn-danger p-3 m-3" onclick="window.location.href='login.php'">Sair</button>
+    <div class="container text-center">
+<h2 class="mb-4">Gerenciador de Estoque</h2>
+<button class="btn btn-primary mb-3" onclick="window.location.href='listaFornecedores.php'">Fornecedores</button><br>
+<button class="btn btn-primary mb-3" onclick="window.location.href='listaUsuarios.php'">Usuários</button><br>
+<button class="btn btn-primary mb-3" onclick="window.location.href='listaProdutos.php'">Produtos</button><br>
+<button class="btn btn-primary mb-3" onclick="window.location.href='listaPedidos.php'">Pedidos</button><br>
+<button class="btn btn-primary mb-3" onclick="window.location.href='Nightlife.html'">Estoque</button><br>
+<button class="btn btn-primary mb-3" onclick="window.location.href='Nightlife.html'">Relatórios</button>
+</div>
 </body>
 </html>
