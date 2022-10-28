@@ -12,41 +12,40 @@
     <body>
         <button type="button" class="btn btn-danger p-1 m-1" onclick="window.location.href='options.php'">Voltar</button>
         <div class="container text-center pt-5 mb-5">
-            <h1>Cadastrar Usuários</h1>
+            <h1>Cadastrar Produto</h1>
         </div>
         <div class="container text-center">
-        <form action="cadastroUsuario.php" method="POST">
+        <form action="cadastroProduto.php" method="POST">
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-            <input class="form-control" type="text" name="loginUser" placeholder="Login do Usuário" required>
-            <label for="">Login de acesso</label>
-            </div>
-            </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-floating mb-3">
-            <input class="form-control" type="text" name="nameUser" maxlength="120" placeholder="Nome do usuário" required>
-            <label for="">Nome do usuário</label>
-            </div>
-            </div>
-                <div class="col">
-                    <div class="form-floating mb-3">
-            <input class="form-control" type="password" name="password" maxlength="64" placeholder="Senha" required>
-            <label for="">Senha do usuário</label>
+            <input class="form-control" type="text" name="descProduto" placeholder="Descrição do produto" required>
+            <label for="">Descrição do produto</label>
             </div>
             </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-                        <select class="form-select" id="typeUser" aria-label="Floating label select example" required>
-                            <option selected value="2">Gerente</option>
-                            <option value="3">Funcionário</option>
-                        </select>
-            <label for="type">Tipo do usuário</label>
-            
+            <input class="form-control" type="text" onkeypress="return /[0-9]/i.test(event.key)" name="codBarra" placeholder="codBarra" maxlength="13">
+            <label for="">Código de Barra</label>
+            </div>
+            </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+            <select class="form-select" name="categoria">
+                    <option value="Arroz">Arroz  
+                    <option value="Feijão">Feijão
+                    <option value="Vassoura">Vassoura
+                    <option value="iogurte">Iogurte
+                    </select>
+                    <label for="">Categoria</label>
+            </div>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
             </div>
             </div>
             </div>

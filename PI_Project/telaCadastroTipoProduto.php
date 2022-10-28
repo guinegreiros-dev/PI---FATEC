@@ -10,6 +10,7 @@
         
     </head>
     <body>
+    <button type="button" class="btn btn-danger p-1 m-1" onclick="window.location.href='options.php'">Voltar</button>
         <div class="container text-center pt-5 mb-5">
             <h1>Cadastrar Categoria</h1>
         </div>

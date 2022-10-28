@@ -12,41 +12,44 @@
     <body>
         <button type="button" class="btn btn-danger p-1 m-1" onclick="window.location.href='options.php'">Voltar</button>
         <div class="container text-center pt-5 mb-5">
-            <h1>Cadastrar Usuários</h1>
+            <h1>Cadastrar Categoria</h1>
         </div>
         <div class="container text-center">
-        <form action="cadastroUsuario.php" method="POST">
+        <form action="cadastroCategoria.php" method="POST">
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-            <input class="form-control" type="text" name="loginUser" placeholder="Login do Usuário" required>
-            <label for="">Login de acesso</label>
-            </div>
-            </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-floating mb-3">
-            <input class="form-control" type="text" name="nameUser" maxlength="120" placeholder="Nome do usuário" required>
-            <label for="">Nome do usuário</label>
-            </div>
-            </div>
-                <div class="col">
-                    <div class="form-floating mb-3">
-            <input class="form-control" type="password" name="password" maxlength="64" placeholder="Senha" required>
-            <label for="">Senha do usuário</label>
+            <input class="form-control" type="text" name="nameCategoria" placeholder="Nome do fornecedor" required>
+            <label for="">Nome da Categoria</label>
             </div>
             </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-                        <select class="form-select" id="typeUser" aria-label="Floating label select example" required>
-                            <option selected value="2">Gerente</option>
-                            <option value="3">Funcionário</option>
-                        </select>
-            <label for="type">Tipo do usuário</label>
-            
+            <input class="form-control" type="text" list="listOptionsValidate" onkeypress="return i.test(event.key)" name="temValidade" placeholder="CNPJ">
+            <label for="">Possui validade?</label>
+            </div>
+            </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+            <input class="form-control" type="text" name="quantidadeMinima" onkeypress="return /[0-9]/i.test(event.key)" maxlength="11" placeholder="CPF">
+            <label for="">Quantidade mínima no estoque para o alerta</label>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+            <input class="form-control" type="text" name="quantidadeDias" placeholder="Nome do fornecedor" required>
+            <label for="">Quantidade de dias antes vencimento para definir o alerta</label>
+            <datalist id="listOptionsValidate">
+                    <option value="Sim">  
+                    <option value="Não">
+                </datalist>
+            </div>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
             </div>
             </div>
             </div>

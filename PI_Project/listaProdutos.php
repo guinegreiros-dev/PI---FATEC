@@ -13,6 +13,7 @@
     <h1>Lista de Produtos</h1>
     <a class="btn btn primary" href="telaCadastroProduto.php" role="button">Novo Produto</a>
     <a class="btn btn primary" href="telaCadastroTipoProduto.php" role="button">Nova categoria</a>
+    <a class="btn btn primary" href="telaCadastroCategoria.php" role="button">Nova categoria</a>
 
     <br>
     <table class="table">
