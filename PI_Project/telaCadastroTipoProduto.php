@@ -11,43 +11,44 @@
     </head>
     <body>
         <div class="container text-center pt-5 mb-5">
-            <h1>Cadastrar Usuários</h1>
+            <h1>Cadastrar Categoria</h1>
         </div>
         <div class="container text-center">
-        <form action="cadastroUsuario.php" method="POST">
+        <form action="cadastroCategoria.php" method="POST">
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-            <input class="form-control" type="text" name="loginUser" placeholder="Nome do fornecedor" required>
-            <label for="">Login de acesso</label>
-            </div>
-            </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-floating mb-3">
-            <input class="form-control" type="text" onkeypress="return /[0-9]/i.test(event.key)" name="nameUser" placeholder="CNPJ">
-            <label for="">Nome do usuário</label>
-            </div>
-            </div>
-                <div class="col">
-                    <div class="form-floating mb-3">
-            <input class="form-control" type="text" name="password" onkeypress="return /[0-9]/i.test(event.key)" maxlength="11" placeholder="CPF">
-            <label for="">Senha do usuário</label>
+            <input class="form-control" type="text" name="nameCategoria" placeholder="Nome do fornecedor" required>
+            <label for="">Nome da Categoria</label>
             </div>
             </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-                <input class="form-control" type="text" name="typeUser" list="typeUserList" onkeypress="return /[0-9]/i.test(event.key)" placeholder="CEP" maxlength="8" required>
-                <datalist id="typeUserList">
-                    <option value="Gerente">  
-                    <option value="Funcionário">
+            <input class="form-control" type="text" list="listOptionsValidate" onkeypress="return i.test(event.key)" name="temValidade" placeholder="CNPJ">
+            <label for="">Possui validade?</label>
+            </div>
+            </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+            <input class="form-control" type="text" name="quantidadeMinima" onkeypress="return /[0-9]/i.test(event.key)" maxlength="11" placeholder="CPF">
+            <label for="">Quantidade mínima no estoque para o alerta</label>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+            <input class="form-control" type="text" name="quantidadeDias" placeholder="Nome do fornecedor" required>
+            <label for="">Quantidade de dias antes vencimento para definir o alerta</label>
+            <datalist id="listOptionsValidate">
+                    <option value="Sim">  
+                    <option value="Não">
                 </datalist>
-
-            <label for="type">Tipo do usuário</label>
-            
+            </div>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
             </div>
             </div>
             </div>

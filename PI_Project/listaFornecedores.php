@@ -11,7 +11,7 @@
   <body>
     <div class="container my-5">
     <h1>Lista de fornecedores</h1>
-    <a class="btn btn primary" href="create.php" role="button">Novo Fornecedor</a>
+    <a class="btn btn primary" href="telaCadastroFornecedores.php" role="button">Novo Fornecedor</a>
     <br>
     <table class="table">
         <thead>
@@ -34,7 +34,7 @@
 
                 $sql = "SELECT * FROM tb_fornecedores";
                 $result = $conexao->query($sql);
-
+            
                 while($row = $result->fetch_assoc()){
                     echo"
 
@@ -56,7 +56,6 @@
                 </tr>
 
                     ";
-
                 }
 
             ?>

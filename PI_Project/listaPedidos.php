@@ -10,43 +10,40 @@
   </head>
   <body>
     <div class="container my-5">
-    <h1>Lista de Usuários</h1>
-    <a class="btn btn primary" href="telaCadastroUsuario.php" role="button">Novo Usuário</a>
+    <h1>Lista de Pedidos</h1>
+    <a class="btn btn primary" href="telaCadastroPedido.php" role="button">Novo Pedido</a>
     <br>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nome do Usuário</th>
-                <th>Login</th>
-                <th>Tipo do Usuário</th>
-
+                <th>Nome</th>
+                <th>CNPJ</th>
             </tr>
         </thead>
         <tbody>
             <?php
                 include("conexao.php");
 
-                $sql = "SELECT * FROM tb_usuarios, tb_tipo_usuarios WHERE FK_TB_TIPO_USUARIOS_ID_TIPO_USER = ID_TIPO_USER;";
+                $sql = "SELECT * FROM `tb_pedidos`";
                 $result = $conexao->query($sql);
-
+            
                 while($row = $result->fetch_assoc()){
                     echo"
 
                     <tr>
-                    <td>$row[ID_USER]</td>
-                    <td>$row[NOME_USER]</td>
-                    <td>$row[LOGIN_USER]</td>
-                    <td>$row[NOME_TIPO_USER]</td>
-
+                    <td>$row[ID_PED]</td>
+                    <td>$row[DESC_PED]</td>
+                    <td>$row[DAT_PED]</td>
                     <td>
                         <a class='btn btn-primary btn-sm' href='/'>Editar</a>
+                        <a class='btn btn-primary btn-sm' href='/'>Ver pedido</a>
                         <a class='btn btn-danger btn-sm' href='/'>Inativar</a>
+                        
                     </td>
                 </tr>
 
                     ";
-
                 }
 
             ?>

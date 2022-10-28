@@ -11,43 +11,41 @@
     </head>
     <body>
         <div class="container text-center pt-5 mb-5">
-            <h1>Cadastrar Usuários</h1>
+            <h1>Cadastrar Produto</h1>
         </div>
         <div class="container text-center">
-        <form action="cadastroUsuario.php" method="POST">
+        <form action="cadastroProduto.php" method="POST">
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-            <input class="form-control" type="text" name="loginUser" placeholder="Nome do fornecedor" required>
-            <label for="">Login de acesso</label>
-            </div>
-            </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-floating mb-3">
-            <input class="form-control" type="text" onkeypress="return /[0-9]/i.test(event.key)" name="nameUser" placeholder="CNPJ">
-            <label for="">Nome do usuário</label>
-            </div>
-            </div>
-                <div class="col">
-                    <div class="form-floating mb-3">
-            <input class="form-control" type="text" name="password" onkeypress="return /[0-9]/i.test(event.key)" maxlength="11" placeholder="CPF">
-            <label for="">Senha do usuário</label>
+            <input class="form-control" type="text" name="descProduto" placeholder="Nome do fornecedor" required>
+            <label for="">Descrição do produto</label>
             </div>
             </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-                <input class="form-control" type="text" name="typeUser" list="typeUserList" onkeypress="return /[0-9]/i.test(event.key)" placeholder="CEP" maxlength="8" required>
-                <datalist id="typeUserList">
-                    <option value="Gerente">  
-                    <option value="Funcionário">
+            <input class="form-control" type="text" onkeypress="return /[0-11]/i.test(event.key)" name="codBarra" placeholder="CNPJ">
+            <label for="">Código de Barra</label>
+            </div>
+            </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+            <input class="form-control" type="text" name="categoria" list="typeUserList" onkeypress="return /[0-9]/i.test(event.key)" maxlength="11" placeholder="CPF">
+            <label for="">Categoria</label>
+            <datalist id="typeUserList">
+                    <option value="Arroz">  
+                    <option value="Feijão">
+                    <option value="Vassoura">
+                    <option value="iogurte">
                 </datalist>
-
-            <label for="type">Tipo do usuário</label>
-            
+            </div>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
             </div>
             </div>
             </div>

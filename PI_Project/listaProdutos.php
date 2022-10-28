@@ -10,35 +10,35 @@
   </head>
   <body>
     <div class="container my-5">
-    <h1>Lista de Usuários</h1>
-    <a class="btn btn primary" href="telaCadastroUsuario.php" role="button">Novo Usuário</a>
+    <h1>Lista de Produtos</h1>
+    <a class="btn btn primary" href="telaCadastroProduto.php" role="button">Novo Produto</a>
+    <a class="btn btn primary" href="telaCadastroTipoProduto.php" role="button">Nova categoria</a>
+
     <br>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nome do Usuário</th>
-                <th>Login</th>
-                <th>Tipo do Usuário</th>
-
+                <th>ID</th>
+                <th>Produto</th>
+                <th>Código de Barras</th>
+                <th>Categoria</th>
             </tr>
         </thead>
         <tbody>
             <?php
                 include("conexao.php");
 
-                $sql = "SELECT * FROM tb_usuarios, tb_tipo_usuarios WHERE FK_TB_TIPO_USUARIOS_ID_TIPO_USER = ID_TIPO_USER;";
+                $sql = "SELECT * FROM `tb_produtos`, tb_categorias WHERE FK_TB_CATEGORIAS_ID_CATEGORIA = ID_CATEGORIA";
                 $result = $conexao->query($sql);
-
+            
                 while($row = $result->fetch_assoc()){
                     echo"
 
                     <tr>
-                    <td>$row[ID_USER]</td>
-                    <td>$row[NOME_USER]</td>
-                    <td>$row[LOGIN_USER]</td>
-                    <td>$row[NOME_TIPO_USER]</td>
-
+                    <td>$row[ID_PROD]</td>
+                    <td>$row[DESC_PROD]</td>
+                    <td>$row[COD_BARRA]</td>
+                    <td>$row[NOME_CATEGORIA]</td>
                     <td>
                         <a class='btn btn-primary btn-sm' href='/'>Editar</a>
                         <a class='btn btn-danger btn-sm' href='/'>Inativar</a>
@@ -46,7 +46,6 @@
                 </tr>
 
                     ";
-
                 }
 
             ?>
