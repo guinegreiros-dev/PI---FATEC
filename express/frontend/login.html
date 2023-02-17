@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width-device-width, initial-scale=1.0">
+	<title>Login</title>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+		integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+		crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<h1>Login</h1>
+	<form>
+		<div>
+			<label for="nome">Login de acesso:</label>
+			<input type="text" id="loginUser" name="nome">
+		</div>
+		<div>
+			<label for="nome">password:</label>
+			<input type="password" id="passwordUser" name="nome">
+		</div>
+
+		<button type="submit" onclick="enviarInformacoes()">Enviar</button>
+	</form>
+
+	<script>
+		function enviarInformacoes() {
+			const
+				loginUser = document.getElementById("loginUser").value,
+				passwordUser = document.getElementById("passwordUser").value;
+
+			var data = Qs.stringify({
+				loginUser: loginUser,
+				passwordUser: passwordUser
+			});
+			var config = {
+				method: 'post',
+				maxBodyLength: Infinity,
+				url: 'http://localhost:8080/user/login',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				data: data
+			};
+
+			axios(config)
+				.then(function (response) {
+
+					if (response.data === "Falha no login.") {
+
+						alert(JSON.stringify(response.data));
+					} else {
+
+						window.location.href = "options.html";
+					}
+
+				})
+				.catch(function (error) {
+					console.log(error);
+					alert(error);
+				});
+		}
+	</script>
+</body>
+
+</html>
