@@ -1,11 +1,11 @@
 const 
-    SupplierModel = require('../Model/SupplierModel'),
+    ProductModel = require('../Model/ProductModel'),
     Helper = require('../Helper');
 
-class Supplier extends SupplierModel{
+class Product extends ProductModel{
 
     /**
-     * Add a new Supplier
+     * Add a new product
      * 
      * @param {*} req 
      * @returns 
@@ -15,19 +15,14 @@ class Supplier extends SupplierModel{
         try {
 
             let {
-                nameSupplier,
-                cnpjSupplier,
-                cpfSupplier,
-                cepSupplier,
-                endSupplier,
-                numEndSupplier,
-                TeleSupplier,
-                ufSupplier
+                descProd,
+                codBarra,
+                categoryId
                } = req.body;
                
-            await super.newSupplier(nameSupplier, cnpjSupplier, cpfSupplier, cepSupplier, endSupplier, numEndSupplier, TeleSupplier, ufSupplier);
+            await super.newProduct(descProd, codBarra, categoryId);
     
-            return Helper.message("supplier", "created");
+            return Helper.message("product", "created");
             
         } catch (error) {
             console.log(error);
@@ -64,7 +59,15 @@ class Supplier extends SupplierModel{
 
     async list() {
 
-        return super.selectAllSuppliers();
+        let listProducts = await super.selectAllProducts();
+
+        // listProducts.forEach(element => {
+
+        //     element.data_valid = new Date(element.data_valid).toLocaleDateString("pt-br");
+            
+        // });
+
+        return listProducts
     }
 
     async disable(req) {
@@ -94,7 +97,7 @@ class Supplier extends SupplierModel{
         return result
     }
     
-}module.exports = Supplier;
+}module.exports = Product;
 
 
 

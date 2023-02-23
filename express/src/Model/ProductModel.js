@@ -4,33 +4,21 @@ const
 class Supplier {
 
     /**
-     * Add a new supplier in Database
      * 
-     * @param {*} NOME_FORNE 
-     * @param {*} CNPJ_FORNE 
-     * @param {*} CPF_FORNE 
-     * @param {*} CEP_FORNE 
-     * @param {*} END_FORNE 
-     * @param {*} NUM_END_FORNE 
-     * @param {*} TELE_FORNE 
-     * @param {*} UF_FORNE 
+     * @param {*} DESC_PROD 
+     * @param {*} COD_BARRA 
+     * @param {*} FK_TB_CATEGORIAS_ID_CATEGORIA 
+     * @param {*} data_valid 
+     * @param {*} amount 
      * @returns 
      */
-    async newSupplier(NOME_FORNE, CNPJ_FORNE, CPF_FORNE, CEP_FORNE, END_FORNE, NUM_END_FORNE, TELE_FORNE, UF_FORNE) {
+    async newProduct(DESC_PROD, COD_BARRA, FK_TB_CATEGORIAS_ID_CATEGORIA) {
 
         const
             execute = await mysql;
 
-        let [rows] = await execute.query(`INSERT INTO tb_fornecedores (NOME_FORNE, 
-            CNPJ_FORNE, 
-            CPF_FORNE, 
-            CEP_FORNE, 
-            END_FORNE, 
-            NUM_END_FORNE, 
-            TELE_FORNE, 
-            UF_FORNE) 
-            VALUES (?, ?, ?, ?, ?, ?,?,?);`,
-            [NOME_FORNE, CNPJ_FORNE, CPF_FORNE, CEP_FORNE, END_FORNE, NUM_END_FORNE, TELE_FORNE, UF_FORNE]);
+        let [rows] = await execute.query(`INSERT INTO tb_produtos (DESC_PROD, COD_BARRA, FK_TB_CATEGORIAS_ID_CATEGORIA) VALUES (?, ?, ?);`,
+            [DESC_PROD, COD_BARRA, FK_TB_CATEGORIAS_ID_CATEGORIA]);
 
         return rows
     }
@@ -72,12 +60,12 @@ class Supplier {
         return rows
     }
 
-    async selectAllSuppliers() {
+    async selectAllProducts() {
 
         const
             execute = await mysql;
 
-        let [rows] = await execute.query(`SELECT * FROM tb_fornecedores ORDER BY ID_FORNE DESC;`);
+        let [rows] = await execute.query(`SELECT ID_PROD, DESC_PROD, COD_BARRA, NOME_CATEGORIA FROM tb_produtos INNER JOIN tb_categorias ON tb_categorias.ID_CATEGORIA = tb_produtos.FK_TB_CATEGORIAS_ID_CATEGORIA ORDER BY ID_PROD DESC`);
 
         return rows
     }

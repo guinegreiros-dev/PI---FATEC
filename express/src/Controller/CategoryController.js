@@ -1,5 +1,5 @@
 const 
-    SupplierModel = require('../Model/SupplierModel'),
+    SupplierModel = require('../Model/CategoryModel'),
     Helper = require('../Helper');
 
 class Supplier extends SupplierModel{
@@ -15,19 +15,19 @@ class Supplier extends SupplierModel{
         try {
 
             let {
-                nameSupplier,
-                cnpjSupplier,
-                cpfSupplier,
-                cepSupplier,
-                endSupplier,
-                numEndSupplier,
-                TeleSupplier,
-                ufSupplier
+                NOME_CATEGORIA, 
+                TEM_VAL, 
+                DIAS_AVISO, 
+                QUANT_MINIMA
                } = req.body;
+
+               if(!DIAS_AVISO) DIAS_AVISO = '0';
+               if(!QUANT_MINIMA) QUANT_MINIMA = '0';
+
                
-            await super.newSupplier(nameSupplier, cnpjSupplier, cpfSupplier, cepSupplier, endSupplier, numEndSupplier, TeleSupplier, ufSupplier);
+            await super.newCategory(NOME_CATEGORIA, TEM_VAL, DIAS_AVISO, QUANT_MINIMA);
     
-            return Helper.message("supplier", "created");
+            return Helper.message("category", "created");
             
         } catch (error) {
             console.log(error);
@@ -64,7 +64,18 @@ class Supplier extends SupplierModel{
 
     async list() {
 
-        return super.selectAllSuppliers();
+        let result = await super.selectAllCategories();
+
+        result.forEach(element => {
+
+            if (element.DIAS_AVISO === null || element.DIAS_AVISO === 0) element.DIAS_AVISO = "-"
+            if (element.QUANT_MINIMA === null || element.QUANT_MINIMA === 0) element.QUANT_MINIMA = "-"
+
+            if(element.status === 1) element.status = "ativo";
+            if(element.status === 0) element.status = "inativo";
+        });
+
+        return result
     }
 
     async disable(req) {

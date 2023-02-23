@@ -4,33 +4,24 @@ const
 class Supplier {
 
     /**
-     * Add a new supplier in Database
      * 
-     * @param {*} NOME_FORNE 
-     * @param {*} CNPJ_FORNE 
-     * @param {*} CPF_FORNE 
-     * @param {*} CEP_FORNE 
-     * @param {*} END_FORNE 
-     * @param {*} NUM_END_FORNE 
-     * @param {*} TELE_FORNE 
-     * @param {*} UF_FORNE 
+     * @param {*} DESC_PROD 
+     * @param {*} COD_BARRA 
+     * @param {*} FK_TB_CATEGORIAS_ID_CATEGORIA 
+     * @param {*} data_valid 
+     * @param {*} amount 
      * @returns 
      */
-    async newSupplier(NOME_FORNE, CNPJ_FORNE, CPF_FORNE, CEP_FORNE, END_FORNE, NUM_END_FORNE, TELE_FORNE, UF_FORNE) {
+    async newCategory(NOME_CATEGORIA, TEM_VAL, DIAS_AVISO, QUANT_MINIMA) {
 
         const
             execute = await mysql;
 
-        let [rows] = await execute.query(`INSERT INTO tb_fornecedores (NOME_FORNE, 
-            CNPJ_FORNE, 
-            CPF_FORNE, 
-            CEP_FORNE, 
-            END_FORNE, 
-            NUM_END_FORNE, 
-            TELE_FORNE, 
-            UF_FORNE) 
-            VALUES (?, ?, ?, ?, ?, ?,?,?);`,
-            [NOME_FORNE, CNPJ_FORNE, CPF_FORNE, CEP_FORNE, END_FORNE, NUM_END_FORNE, TELE_FORNE, UF_FORNE]);
+        let [rows] = await execute.query(`
+
+        INSERT INTO tb_categorias (NOME_CATEGORIA, TEM_VAL, DIAS_AVISO, QUANT_MINIMA) VALUES (?, ?, ?, ?);
+        `,
+            [NOME_CATEGORIA, TEM_VAL, DIAS_AVISO, QUANT_MINIMA]);
 
         return rows
     }
@@ -72,22 +63,36 @@ class Supplier {
         return rows
     }
 
-    async selectAllSuppliers() {
+    async selectAllCategories() {
 
         const
             execute = await mysql;
 
-        let [rows] = await execute.query(`SELECT * FROM tb_fornecedores ORDER BY ID_FORNE DESC;`);
+        let [rows] = await execute.query(`
+        SELECT
+        ID_CATEGORIA,
+        NOME_CATEGORIA,
+        CASE
+            WHEN TEM_VAL = 1 THEN 'sim'
+            WHEN TEM_VAL = 0 THEN 'não'
+        END
+        TEM_VAL,
+        DIAS_AVISO,
+        QUANT_MINIMA,
+        status
+        FROM gestao_estoque.tb_categorias 
+        ORDER BY ID_CATEGORIA DESC
+        `);
 
         return rows
     }
 
-    async disableSupplier(supplierId) {
+    async disableCategory(categorId) {
 
         const
             execute = await mysql;
 
-        let [rows] = await execute.query(`UPDATE tb_fornecedores SET status = 0 WHERE (ID_FORNE = ?);`, [supplierId]);
+        let [rows] = await execute.query(`UPDATE tb_categorias SET status = 0 WHERE (ID_FORNE = ?);`, [categorId]);
 
         return rows
     }

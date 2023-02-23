@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width-device-width, initial-scale=1.0">
+  <title>Cadastro de Produto</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+    crossorigin="anonymous"></script>
+</head>
+
+<body onload="categories()">
+  <h1>Cadastro</h1>
+  <form>
+    <div>
+      <label for="nome">Descrição do produto </label>
+      <input type="text" id="descProduct" name="nome">
+    </div>
+    <div>
+      <label for="email">Código de barras</label>
+      <input type="text" id="codBarras" name="email">
+    </div>
+    <div>
+      <label for="categories">Categoria</label>
+      <select id="categories" name="categories"></select>
+    </div>
+  </form>
+  <button type="submit" onclick="enviarInformacoes()">Enviar</button>
+
+  <script>
+
+    function categories() {
+
+      var config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:8080/category',
+        headers: {}
+      };
+
+      axios(config)
+        .then(function (response) {
+
+          const categories = response.data
+
+          const options = categories.map(element => {
+            return `<option value="${element.ID_CATEGORIA}">${element.NOME_CATEGORIA}</option>`;
+          });
+
+          const select = document.getElementById('categories');
+          select.innerHTML = options.join('');
+
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+    }
+    function enviarInformacoes() {
+      let
+        descProduct = document.getElementById("descProduct").value,
+        codBarras = document.getElementById("codBarras").value,
+        categories = document.getElementById("categories").value
+
+      var data = Qs.stringify({
+        descProd: descProduct,
+        codBarra: codBarras,
+        categoryId: categories,
+      });
+      var config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:8080/product',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: data
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          alert(JSON.stringify(response.data));
+          window.location.href = "listProduct.html";
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert("Algo deu errado.");
+        });
+    }
+  </script>
+</body>
+
+</html>

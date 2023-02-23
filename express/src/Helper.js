@@ -20,6 +20,37 @@ class Helper {
                 }
                 break;
 
+                case "product":
+                    switch (reason) {
+    
+                        case "created": result = "Produto cadastrado com sucesso."; break;
+    
+                        case "edited": result = "Fornecedor editado com sucesso."; break;
+    
+                        case "disable": result = "Fornecedor desativado com sucesso."; break;
+    
+                        case "enable": result = "Fornecedor ativado com sucesso."; break;
+                    }
+                    break;
+
+                    case "category":
+                        switch (reason) {
+        
+                            case "created": result = "Categoria cadastrado com sucesso."; break;
+        
+                            case "edited": result = "Fornecedor editado com sucesso."; break;
+        
+                            case "disable": result = "Fornecedor desativado com sucesso."; break;
+        
+                            case "enable": result = "Fornecedor ativado com sucesso."; break;
+                        }
+                        break;
+
+
+
+
+
+
             case "error":
                 switch (reason) {
 

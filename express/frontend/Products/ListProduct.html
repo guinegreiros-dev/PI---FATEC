@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro de Produto</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/express/frontend/editUser.html"></script>
+</head>
+
+<body onload="getAllSuppliers()">
+  <button type="button" class="btn btn-danger p-3 m-3" onclick="window.location.href='../options.html'">Voltar</button>
+  <div class="container my-5">
+    <h1>Lista de Produtos</h1>
+    <a class='btn btn-primary btn-sm' href='addProduct.html'>Novo Produto</a>
+    <a class='btn btn-primary btn-sm' href='../Category/ListCategory.html'>Categoria</a>
+    <br>
+    <table style="width: 100%; height: 500px;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Descrição</th>
+          <th>Código de barras</th>
+          <th>Categoria</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-corpo">
+        <!-- Conteúdo da tabela -->
+      </tbody>
+    </table>
+  </div>
+  <script>
+    function getAllSuppliers() {
+
+      var config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:8080/product',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+      };
+
+      axios(config)
+        .then(function (response) {
+
+          const
+            data = response.data;
+
+            console.log(data)
+
+          let tableFront = document.querySelector("#tabela-corpo");
+
+          data.forEach(function (supplier) {
+            tableFront.innerHTML += `
+          <tr>
+            <td>${supplier.ID_PROD}</td>
+            <td>${supplier.DESC_PROD}</td>
+            <td>${supplier.COD_BARRA}</td>
+            <td>${supplier.NOME_CATEGORIA}</td>
+            <td><a class='btn btn-primary btn-sm' onclick="editSupplier('${supplier.ID_FORNE}')"'>Editar</a></td>
+            <td><a class='btn btn-danger btn-sm' onclick="deleteSupplier('${supplier.ID_FORNE}')"'>Inativar</a></td>
+            <td><a class='btn btn-danger btn-sm' onclick="enableSupplier('${supplier.ID_FORNE}')"'>Ativar</a></td>
+          </tr>
+        `;
+          });
+
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert("Algo deu errado.");
+        });
+    }
+
+    function deleteSupplier(supplierId) {
+
+      var config = {
+        method: 'delete',
+        maxBodyLength: Infinity,
+        url: `http://localhost:8080/supplier/${supplierId}`,
+        headers: {}
+      };
+
+      axios(config)
+        .then(function (response) {
+          alert(JSON.stringify(response.data));
+          location.reload()
+        })
+        .catch(function (error) {
+          alert(error);
+        });
+    }
+
+    function enableSupplier(supplierId) {
+
+
+      var config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `http://localhost:8080/supplier/${supplierId}`,
+        headers: {}
+      };
+
+      axios(config)
+        .then(function (response) {
+          alert(JSON.stringify(response.data));
+          location.reload()
+        })
+        .catch(function (error) {
+          alert(error);
+        });
+    }
+
+
+    function editSupplier(userId){
+
+      localStorage.setItem("supplierId", userId);
+
+      window.location.href = `editSuplier.html`
+    }
+  </script>
+</body>
+
+</html>

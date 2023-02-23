@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width-device-width, initial-scale=1.0">
+  <title>Cadastro de Categoria</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+    crossorigin="anonymous"></script>
+</head>
+
+<body onload="categories()">
+  <h1>Cadastro</h1>
+  <form>
+    <div>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nameCategory" name="nome">
+    </div>
+    <div>
+      <label for="validate">Possui validade?</label>
+      <select id="validate" name="validate">
+        <option value="1">Sim</option>
+        <option value="0">Não</option>
+      </select>
+    </div>
+    <div>
+      <label for="daysAlert">Dias de aviso</label>
+      <input type="number" id="daysAlert" name="nome">
+    </div>
+    <div>
+      <label for="minimumAmount">Quantidade mínima</label>
+      <input type="number" id="minimumAmount" name="nome">
+    </div>
+  </form>
+  <button type="submit" onclick="enviarInformacoes()">Enviar</button>
+
+  <script>
+    function enviarInformacoes() {
+      let
+        nameCategory = document.getElementById("nameCategory").value,
+        validate = document.getElementById("validate").value,
+        daysAlert = document.getElementById("daysAlert").value,
+        minimumAmount = document.getElementById("minimumAmount").value
+
+      var data = Qs.stringify({
+        NOME_CATEGORIA: nameCategory,
+        TEM_VAL: validate,
+        DIAS_AVISO: daysAlert,
+        QUANT_MINIMA: minimumAmount
+      });
+      var config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:8080/category',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: data
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          alert(JSON.stringify(response.data));
+          window.location.href = "listCategory.html";
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert("Algo deu errado.");
+        });
+    }
+  </script>
+</body>
+
+</html>
