@@ -1,0 +1,15 @@
+.conteudo {
+    /* set a min-height to ensure that the content takes up at least the height of the viewport */
+    min-height: calc(80vh - 30px);
+    /* add padding-bottom equal to the height of the fixed element to make sure it doesn't overlap with the content */
+    padding-bottom: 30px;
+  }
+  
+  .fixar-embaixo {
+    position: fixed;
+    bottom: 0;
+    /* set a width to ensure that the element doesn't stretch to the full width of the screen */
+    width: 100%;
+    /* set a height for the fixed element */
+    height: 30px;
+  }
