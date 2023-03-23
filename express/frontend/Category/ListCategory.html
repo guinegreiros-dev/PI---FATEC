@@ -61,9 +61,9 @@
             <td>${category.DIAS_AVISO}</td>
             <td>${category.QUANT_MINIMA}</td>
             <td>${category.status}</td>
-            <td><a class='btn btn-primary btn-sm' onclick="editSupplier('${category.ID_FORNE}')"'>Editar</a></td>
-            <td><a class='btn btn-danger btn-sm' onclick="deleteSupplier('${category.ID_FORNE}')"'>Inativar</a></td>
-            <td><a class='btn btn-danger btn-sm' onclick="enableSupplier('${category.ID_FORNE}')"'>Ativar</a></td>
+            <td><a class='btn btn-primary btn-sm' onclick="editCategory('${category.ID_CATEGORIA}')"'>Editar</a></td>
+            <td><a class='btn btn-danger btn-sm' onclick="deleteCategory('${category.ID_CATEGORIA}')"'>Inativar</a></td>
+            <td><a class='btn btn-danger btn-sm' onclick="enableCategory('${category.ID_CATEGORIA}')"'>Ativar</a></td>
           </tr>
         `;
           });
@@ -75,12 +75,12 @@
         });
     }
 
-    function deleteSupplier(supplierId) {
+    function deleteCategory(categoryId) {
 
       var config = {
         method: 'delete',
         maxBodyLength: Infinity,
-        url: `http://localhost:8080/supplier/${supplierId}`,
+        url: `http://localhost:8080/category/${categoryId}`,
         headers: {}
       };
 
@@ -94,13 +94,13 @@
         });
     }
 
-    function enableSupplier(supplierId) {
+    function enableCategory(categoryId) {
 
 
       var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `http://localhost:8080/supplier/${supplierId}`,
+        url: `http://localhost:8080/category/${categoryId}`,
         headers: {}
       };
 
@@ -114,12 +114,11 @@
         });
     }
 
+    function editCategory(categoryId){
 
-    function editSupplier(userId){
+      localStorage.setItem("categoryId", categoryId);
 
-      localStorage.setItem("supplierId", userId);
-
-      window.location.href = `editSuplier.html`
+      window.location.href = `editCategory.html`
     }
   </script>
 </body>

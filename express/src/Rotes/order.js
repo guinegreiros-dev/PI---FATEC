@@ -1,40 +1,40 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const encoder = bodyParser.urlencoded();
-const CategoryController = require('../Controller/CategoryController');
+const OrderController = require('../Controller/OrderController');
 
-const CategoryC = new CategoryController();
+const OrderC = new OrderController();
 
 const router = express.Router();
 
 router.post('/', encoder,async(req,res) =>{
 
-    res.send(await CategoryC.create(req));
+    res.send(await OrderC.create(req));
 });
 
 router.get('/', encoder,async(req,res) =>{
 
-    res.send(await CategoryC.list(req, res));
+    res.send(await OrderC.list(req, res));
 });  
 
 router.put('/', encoder,async(req,res) =>{
 
-    res.send(await CategoryC.edit(req));
+    res.send(await OrderC.edit(req));
 });
 
 router.delete('/:categoryId', encoder,async(req,res) =>{
 
-    res.send(await CategoryC.disable(req));
+    res.send(await OrderC.disable(req));
 });
 
 router.post('/:categoryId', encoder,async(req,res) =>{
 
-    res.send(await CategoryC.enable(req));
+    res.send(await OrderC.enable(req));
 });
 
 router.get('/:categoryId', encoder,async(req,res) =>{
 
-    res.send(await CategoryC.specific(req));
+    res.send(await OrderC.specific(req));
 });
 
 module.exports = router

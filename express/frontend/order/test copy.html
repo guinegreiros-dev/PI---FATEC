@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cadastro de Pedidos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
+</head>
+
+<body onload="suppliers(), products()">
+    <h1>Cadastro de Pedidos</h1>
+    <form id="pedido-form">
+        <label for="nome-cliente">Nome do Fornecedor:</label>
+        <select id="supplier" name=""></select><br><br>
+
+        <fieldset>
+            <legend>Adicionar Produto:</legend>
+            <label for="product">Produto:</label>
+            <select id="product" name="produto"></select><br><br>
+
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade"><br><br>
+
+            <button type="button" id="add-produto">Adicionar Produto</button>
+        </fieldset>
+
+        <hr>
+
+        <h2>Produtos Selecionados:</h2>
+        <ul id="produtos-lista">
+        </ul>
+
+        <hr>
+
+        <button type="submit" id="cadastrar-pedido">Cadastrar Pedido</button>
+    </form>
+
+    <script>
+        const form = document.getElementById("pedido-form");
+        const produtosLista = document.getElementById("produtos-lista");
+        const addProdutoBtn = document.getElementById("add-produto");
+        const cadastrarPedidoBtn = document.getElementById("cadastrar-pedido");
+
+        let produtos = [];
+
+        addProdutoBtn.addEventListener("click", () => {
+            const produto = document.getElementById("product");
+            const quantidade = document.getElementById("quantidade");
+            const produtoSelecionado = produto.options[produto.selectedIndex].text;
+
+            produtos.push({ nome: produtoSelecionado, quantidade: quantidade.value });
+
+            const produtoLi = document.createElement("li");
+            const produtoTexto = document.createTextNode(`${produtoSelecionado} - ${quantidade.value} `);
+            const removerBtn = document.createElement("button");
+            removerBtn.textContent = "Remover";
+            removerBtn.addEventListener("click", () => {
+                produtos.splice(produtos.findIndex(p => p.nome === produtoSelecionado && p.quantidade === quantidade.value), 1);
+                produtosLista.removeChild(produtoLi);
+            });
+
+            produtoLi.appendChild(produtoTexto);
+            produtoLi.appendChild(removerBtn);
+            produtosLista.appendChild(produtoLi);
+        });
+
+        const pedido = {}
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const supplier = document.getElementById("supplier").value;
+            const pedido = { supplier: supplier, produtos: produtos };
+
+            var data = Qs.stringify({
+                objOrder: pedido
+            });
+            var config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: 'http://localhost:8080/order',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: data
+            };
+
+            axios(config)
+                .then(function (response) {
+                    alert(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
+        function suppliers() {
+
+            var config = {
+                method: 'get',
+                maxBodyLength: Infinity,
+                url: 'http://localhost:8080/supplier',
+                headers: {}
+            };
+
+            axios(config)
+                .then(function (response) {
+
+                    const categories = response.data
+
+                    const options = categories.map(element => {
+                        return `<option value="${element.ID_FORNE}">${element.NOME_FORNE}</option>`;
+                    });
+
+                    const select = document.getElementById('supplier');
+                    select.innerHTML = options.join('');
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        }
+
+        function products() {
+
+            var config = {
+                method: 'get',
+                maxBodyLength: Infinity,
+                url: 'http://localhost:8080/product',
+                headers: {}
+            };
+
+            axios(config)
+                .then(function (response) {
+
+                    const categories = response.data
+
+                    const options = categories.map(element => {
+                        return `<option value="${element.DESC_PROD}">${element.DESC_PROD}</option>`;
+                    });
+
+                    const select = document.getElementById('product');
+                    select.innerHTML = options.join('');
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        }
+    </script>
+</body>
+
+</html>

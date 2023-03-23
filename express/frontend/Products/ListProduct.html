@@ -10,7 +10,7 @@
   <script src="/express/frontend/editUser.html"></script>
 </head>
 
-<body onload="getAllSuppliers()">
+<body onload="getAllProducts()">
   <button type="button" class="btn btn-danger p-3 m-3" onclick="window.location.href='../options.html'">Voltar</button>
   <div class="container my-5">
     <h1>Lista de Produtos</h1>
@@ -24,6 +24,7 @@
           <th>Descrição</th>
           <th>Código de barras</th>
           <th>Categoria</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody id="tabela-corpo">
@@ -32,7 +33,7 @@
     </table>
   </div>
   <script>
-    function getAllSuppliers() {
+    function getAllProducts() {
 
       var config = {
         method: 'get',
@@ -53,16 +54,17 @@
 
           let tableFront = document.querySelector("#tabela-corpo");
 
-          data.forEach(function (supplier) {
+          data.forEach(function (product) {
             tableFront.innerHTML += `
           <tr>
-            <td>${supplier.ID_PROD}</td>
-            <td>${supplier.DESC_PROD}</td>
-            <td>${supplier.COD_BARRA}</td>
-            <td>${supplier.NOME_CATEGORIA}</td>
-            <td><a class='btn btn-primary btn-sm' onclick="editSupplier('${supplier.ID_FORNE}')"'>Editar</a></td>
-            <td><a class='btn btn-danger btn-sm' onclick="deleteSupplier('${supplier.ID_FORNE}')"'>Inativar</a></td>
-            <td><a class='btn btn-danger btn-sm' onclick="enableSupplier('${supplier.ID_FORNE}')"'>Ativar</a></td>
+            <td>${product.ID_PROD}</td>
+            <td>${product.DESC_PROD}</td>
+            <td>${product.COD_BARRA}</td>
+            <td>${product.NOME_CATEGORIA}</td>
+            <td>${product.status}</td>
+            <td><a class='btn btn-primary btn-sm' onclick="editProduct('${product.ID_PROD}')"'>Editar</a></td>
+            <td><a class='btn btn-danger btn-sm' onclick="deleteProduct('${product.ID_PROD}')"'>Inativar</a></td>
+            <td><a class='btn btn-danger btn-sm' onclick="enableProduct('${product.ID_PROD}')"'>Ativar</a></td>
           </tr>
         `;
           });
@@ -74,12 +76,12 @@
         });
     }
 
-    function deleteSupplier(supplierId) {
+    function deleteProduct(productId) {
 
       var config = {
         method: 'delete',
         maxBodyLength: Infinity,
-        url: `http://localhost:8080/supplier/${supplierId}`,
+        url: `http://localhost:8080/product/${productId}`,
         headers: {}
       };
 
@@ -93,13 +95,12 @@
         });
     }
 
-    function enableSupplier(supplierId) {
-
+    function enableProduct(productId) {
 
       var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `http://localhost:8080/supplier/${supplierId}`,
+        url: `http://localhost:8080/product/${productId}`,
         headers: {}
       };
 
@@ -113,12 +114,11 @@
         });
     }
 
+    function editProduct(prodId){
 
-    function editSupplier(userId){
+      localStorage.setItem("prodId", prodId);
 
-      localStorage.setItem("supplierId", userId);
-
-      window.location.href = `editSuplier.html`
+      window.location.href = `editProduct.html`
     }
   </script>
 </body>

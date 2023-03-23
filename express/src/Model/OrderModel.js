@@ -1,27 +1,74 @@
 const
     mysql = require('../../connection');
 
-class Supplier {
+class Order {
 
-    /**
-     * 
-     * @param {*} DESC_PROD 
-     * @param {*} COD_BARRA 
-     * @param {*} FK_TB_CATEGORIAS_ID_CATEGORIA 
-     * @param {*} data_valid 
-     * @param {*} amount 
-     * @returns 
-     */
-    async newCategory(NOME_CATEGORIA, TEM_VAL, DIAS_AVISO, QUANT_MINIMA) {
+    async create(FK_TB_FORNECEDORES_ID_FORNE) {
 
         const
             execute = await mysql;
 
         let [rows] = await execute.query(`
-
-        INSERT INTO tb_categorias (NOME_CATEGORIA, TEM_VAL, DIAS_AVISO, QUANT_MINIMA) VALUES (?, ?, ?, ?);
+        INSERT INTO 
+            tb_pedidos(
+                FK_TB_FORNECEDORES_ID_FORNE) 
+                VALUES (?);
         `,
-            [NOME_CATEGORIA, TEM_VAL, DIAS_AVISO, QUANT_MINIMA]);
+            [FK_TB_FORNECEDORES_ID_FORNE]);
+
+        return rows
+    }
+
+    async productIdByName(productName) {
+
+        const
+            execute = await mysql;
+
+        let [rows] = await execute.query(`
+        SELECT 
+            ID_PROD 
+        FROM 
+            tb_produtos 
+        WHERE 
+            DESC_PROD = ?
+        `,
+            [productName]);
+
+        return rows
+    }
+
+    async orderIdCreated(productName) {
+
+        const
+            execute = await mysql;
+
+        let [rows] = await execute.query(`
+        SELECT 
+            ID_PROD 
+        FROM 
+            tb_produtos 
+        WHERE 
+            DESC_PROD = ?
+        `,
+            [productName]);
+
+        return rows
+    }
+
+    async insertOrderProduct(productName) {
+
+        const
+            execute = await mysql;
+
+        let [rows] = await execute.query(`
+        SELECT 
+            ID_PROD 
+        FROM 
+            tb_produtos 
+        WHERE 
+            DESC_PROD = ?
+        `,
+            [productName]);
 
         return rows
     }
@@ -111,4 +158,4 @@ class Supplier {
         return rows
     }
 
-} module.exports = Supplier;
+} module.exports = Order;

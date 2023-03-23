@@ -38,24 +38,21 @@ class Supplier {
      * @param {*} UF_FORNE 
      * @returns 
      */
-    async editSupplier(idSupplier, NOME_FORNE, CNPJ_FORNE, CPF_FORNE, CEP_FORNE, END_FORNE, NUM_END_FORNE, TELE_FORNE, UF_FORNE) {
+    async editSupplier(descProd, codBarra, categoryId, prodId) {
 
         const
             execute = await mysql;
 
         let [rows] = await execute.query(`
-            UPDATE tb_fornecedores SET 
-            NOME_FORNE = ?, 
-            CNPJ_FORNE = ?, 
-            CPF_FORNE = ?, 
-            CEP_FORNE = ?, 
-            END_FORNE = ?, 
-            NUM_END_FORNE = ?, 
-            TELE_FORNE = ?, 
-            UF_FORNE = ? 
-            WHERE (ID_FORNE = ?);
+        UPDATE 
+            tb_produtos 
+        SET 
+            DESC_PROD = ?, 
+            COD_BARRA = ?, 
+            FK_TB_CATEGORIAS_ID_CATEGORIA = ? 
+        WHERE (ID_PROD = ?);
             `,
-            [NOME_FORNE, CNPJ_FORNE, CPF_FORNE, CEP_FORNE, END_FORNE, NUM_END_FORNE, TELE_FORNE, UF_FORNE, idSupplier]);
+            [descProd, codBarra, categoryId, prodId]);
 
         return rows
     }
@@ -65,37 +62,57 @@ class Supplier {
         const
             execute = await mysql;
 
-        let [rows] = await execute.query(`SELECT ID_PROD, DESC_PROD, COD_BARRA, NOME_CATEGORIA FROM tb_produtos INNER JOIN tb_categorias ON tb_categorias.ID_CATEGORIA = tb_produtos.FK_TB_CATEGORIAS_ID_CATEGORIA ORDER BY ID_PROD DESC`);
+        let [rows] = await execute.query(`
+        SELECT 
+            ID_PROD, 
+            DESC_PROD, 
+            COD_BARRA, 
+            NOME_CATEGORIA,
+            tb_produtos.status
+        FROM 
+            tb_produtos 
+        INNER JOIN 
+            tb_categorias ON tb_categorias.ID_CATEGORIA = tb_produtos.FK_TB_CATEGORIAS_ID_CATEGORIA 
+        ORDER BY 
+            ID_PROD DESC`);
 
         return rows
     }
 
-    async disableSupplier(supplierId) {
+    async disable(productId) {
 
         const
             execute = await mysql;
 
-        let [rows] = await execute.query(`UPDATE tb_fornecedores SET status = 0 WHERE (ID_FORNE = ?);`, [supplierId]);
+        let [rows] = await execute.query(`UPDATE tb_produtos SET status = 0 WHERE (ID_PROD = ?);`, [productId]);
 
         return rows
     }
 
-    async enableSupplier(supplierId) {
+    async enable(productId) {
 
         const
             execute = await mysql;
 
-        let [rows] = await execute.query(`UPDATE tb_fornecedores SET status = 1 WHERE (ID_FORNE = ?);`, [supplierId]);
+        let [rows] = await execute.query(`UPDATE tb_produtos SET status = 1 WHERE (ID_PROD = ?);`, [productId]);
 
         return rows
     }
 
-    async specific(supplierId) {
+    async specific(productId) {
 
         const
             execute = await mysql;
 
-        let [rows] = await execute.query(`SELECT NOME_FORNE, CNPJ_FORNE, CPF_FORNE, CEP_FORNE, END_FORNE, NUM_END_FORNE, TELE_FORNE, UF_FORNE FROM tb_fornecedores WHERE ID_FORNE = ?`, [supplierId]);
+        let [rows] = await execute.query(`
+        SELECT 
+            DESC_PROD, 
+            COD_BARRA,
+            FK_TB_CATEGORIAS_ID_CATEGORIA AS categoryId
+        FROM 
+            tb_produtos 
+        WHERE 
+            ID_PROD = ?`, [productId]);
 
         return rows
     }
