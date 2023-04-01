@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cadastro de Pedidos</title>
+</head>
+
+<body onload="suppliers(), products()">
+    <h1>Cadastro de Pedidos</h1>
+    <form onsubmit="enviarPedido(event)">
+        <div>
+        
+            <label for="suppliers">Fornecedor: </label>
+            <select id="suppliers" name=""></select>
+        </div>
+        <div>
+            <label for="produto">Produto: </label>
+            <select id="produto" name="test"></select>
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade">
+            <button type="button" onclick="adicionarProduto(event)">Adicionar Produto</button><br><br>
+        </div>
+        <div id="produtos">
+            <!-- Aqui é onde os produtos serão listados -->
+        </div><br><br>
+
+        <button type="submit">Cadastrar Pedido</button>
+    </form>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        function suppliers() {
+
+            var config = {
+                method: 'get',
+                maxBodyLength: Infinity,
+                url: 'http://localhost:8080/supplier',
+                headers: {}
+            };
+
+            axios(config)
+                .then(function (response) {
+
+                    const categories = response.data
+
+                    const options = categories.map(element => {
+                        return `<option value="${element.ID_FORNE}">${element.NOME_FORNE}</option>`;
+                    });
+
+                    const select = document.getElementById('suppliers');
+                    select.innerHTML = options.join('');
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        }
+
+        function products() {
+
+            var config = {
+                method: 'get',
+                maxBodyLength: Infinity,
+                url: 'http://localhost:8080/product',
+                headers: {}
+            };
+
+            axios(config)
+                .then(function (response) {
+
+                    const categories = response.data
+
+                    const options = categories.map(element => {
+                        return `<option value="${element.DESC_PROD}">${element.DESC_PROD}</option>`;
+                    });
+
+                    const select = document.getElementById('produto');
+                    select.innerHTML = options.join('');
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        }
+        // Função para adicionar produtos à lista
+        var idLinha = 1; // Define um contador de IDs para as linhas da tabela
+
+        function adicionarProduto(event) {
+            event.preventDefault();
+            var produto = document.getElementById("produto").value;
+            var quantidade = parseFloat(document.getElementById("quantidade").value);
+
+            if (!produto || isNaN(quantidade) || quantidade <= 0) {
+                return;
+            }
+
+            var tabelaProdutos = document.getElementById("produtos").getElementsByTagName("tbody")[0];
+            var linhaExistente = document.getElementById("linha-" + produto); // Verifica se a linha já existe
+
+            if (linhaExistente) {
+                var celulaQuantidade = linhaExistente.cells[1];
+                var novaQuantidade = parseFloat(celulaQuantidade.textContent) + quantidade;
+                celulaQuantidade.textContent = novaQuantidade.toFixed(2);
+            } else {
+                var novaLinha = tabelaProdutos.insertRow();
+                novaLinha.id = "linha-" + produto; // Define um ID único para a nova linha
+
+                var novaCelulaProduto = novaLinha.insertCell(0);
+                novaCelulaProduto.textContent = produto;
+
+                var novaCelulaQuantidade = novaLinha.insertCell(1);
+                novaCelulaQuantidade.textContent = quantidade.toFixed(2);
+            }
+
+            document.getElementById("produto").value = "";
+            document.getElementById("quantidade").value = "";
+        }
+
+        // Função para enviar o pedido para o back-end
+        function enviarPedido(event) {
+            event.preventDefault();
+            var cliente = document.getElementById("suppliers").value;
+            var produtos = [];
+
+            var tabelaProdutos = document.getElementById("produtos").getElementsByTagName("tbody")[0];
+            for (var i = 0; i < tabelaProdutos.rows.length; i++) {
+                var produto = tabelaProdutos.rows[i].cells[0].textContent.trim(); // Utiliza textContent e trim
+                var quantidade = parseFloat(tabelaProdutos.rows[i].cells[1].textContent.trim()); // Utiliza textContent, trim e parseFloat
+                if (!isNaN(quantidade)) {
+                    produtos.push({ produto: produto, quantidade: quantidade });
+                }
+            }
+
+            console.log(tabelaProdutos.rows.length)
+
+            var pedido = { cliente: cliente, produtos: produtos };
+
+            console.log(pedido)
+
+            axios.post('/cadastrar-pedido', pedido)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    </script>
+</body>
+
+</html>

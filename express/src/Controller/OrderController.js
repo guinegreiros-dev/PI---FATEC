@@ -1,28 +1,38 @@
 const
-    ProductModel = require('../Model/ProductModel'),
+    orderModel = require('../Model/OrderModel'),
+    orderM = new orderModel(),
     Helper = require('../Helper');
 
-class Product extends ProductModel {
+class Order extends orderModel {
 
-    /**
-     * Add a new product
-     * 
-     * @param {*} req 
-     * @returns 
-     */
     async create(req) {
 
         try {
 
             let {
-                descProd,
-                codBarra,
-                categoryId
+                objOrder
             } = req.body;
 
-            await super.newProduct(descProd, codBarra, categoryId);
+            let orderCreated = await super.create(objOrder.supplier);
 
-            return Helper.message("product", "created");
+            console.log(orderCreated.insertId)
+
+            for (const element of objOrder.produtos) {
+
+
+                let [productId] = await super.productIdByName(element.nome)
+
+                productId = Object.values(productId[0])
+
+                
+                
+            }
+
+            console.log(objOrder);
+
+            
+
+            return Helper.message("order", "created");
 
         } catch (error) {
             console.log(error);
@@ -128,7 +138,7 @@ class Product extends ProductModel {
         }
     }
 
-} module.exports = Product;
+} module.exports = Order;
 
 
 

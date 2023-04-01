@@ -19,20 +19,20 @@ router.get('/', encoder,async(req,res) =>{
 
 router.put('/', encoder,async(req,res) =>{
 
-    res.send(await ProductC.editSupplier(req));
+    res.send(await ProductC.edit(req));
 });
 
-router.delete('/:supplierId', encoder,async(req,res) =>{
+router.delete('/:productId', encoder,async(req,res) =>{
 
     res.send(await ProductC.disable(req));
 });
 
-router.post('/:supplierId', encoder,async(req,res) =>{
+router.post('/:productId', encoder,async(req,res) =>{
 
     res.send(await ProductC.enable(req));
 });
 
-router.get('/:supplierId', encoder,async(req,res) =>{
+router.get('/:productId', encoder,async(req,res) =>{
 
     res.send(await ProductC.specific(req));
 });
