@@ -9,7 +9,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+	<link href="HTElements/css/custom.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
 		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
 		crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
@@ -18,19 +19,33 @@
 </head>
 
 <body>
-	<h1>Login</h1>
-	<form>
-		<div>
-			<label for="nome">Login de acesso:</label>
-			<input type="text" id="loginUser" name="nome">
+	<div style="background-color: darkred;">
+		<h3 class="text-center pt-1 pb-2" style="color: white;">Real Manage</h3></div>
+	<div class="conteudo">
+	<div class="container w-25" style="padding-top: 3%">
+		<div class="text-center pb-3">
+		<img class="img-fluid" src="HTElements/icons/shop-512.png">
 		</div>
-		<div>
-			<label for="nome">password:</label>
-			<input type="password" id="passwordUser" name="nome">
+	<form>
+		<div class="form-group">
+			<input type="text" class="form-control" id="loginUser" name="nome" placeholder="Usuário">
+			<br>
+		</div>
+		<div class="form-group">
+			<input type="password" class="form-control" id="passwordUser" name="nome" placeholder="Senha">
+			<br>
 		</div>
 	</form>
-	<button type="submit" onclick="enviarInformacoes()">Enviar</button>
-
+	<div class="text-center">
+		<div class="btn btn-success">
+			<img class="img-fluid" src="HTElements/icons/arrow-24-24.png">
+	<button type="submit" class="btn" onclick="enviarInformacoes()" style="color: white">LOGIN</button>
+	</div>
+</div>
+</div>
+<div class="fixar-embaixo text-center">
+    <p>&#174;2023, Supermercado Real</p>
+  </div>
 	<script>
 		function enviarInformacoes() {
 			const
