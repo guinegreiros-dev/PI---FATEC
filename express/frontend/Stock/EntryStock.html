@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Entrada de produto</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
+</head>
+
+<body onload="order(), products()">
+    <button type="button" class="btn btn-danger p-3 m-3" onclick="window.location.href='listStock.html'">Voltar</button>
+    <h1>Entrada de produto</h1>
+    <form id="pedido-form">
+        <label for="order">Pedido:</label>
+        <select id="order" name="" onchange="viewOrder()"></select><br><br>
+        <label>Nota fiscal:</label>
+        <input type="number" id="nota" name="nota" />
+
+        <hr>
+        <h2>Produtos Selecionados:</h2>
+        <ul id="produtos-lista"></ul>
+        <hr>
+
+        <button type="submit" id="cadastrar-entrada">Cadastrar Entrada</button>
+    </form>
+
+    <script>
+
+        function order() {
+
+            var config = {
+                method: 'get',
+                maxBodyLength: Infinity,
+                url: 'http://localhost:8080/order',
+                headers: {}
+            };
+
+            axios(config)
+                .then(function (response) {
+
+                    const categories = response.data
+
+                    const options = categories.map(element => {
+                        return `<option value="${element.ID_PED}" type= >${element.ID_PED}</option>`;
+                    });
+
+                    const select = document.getElementById('order');
+                    select.innerHTML = options.join('');
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        }
+
+        function products() {
+
+            var config = {
+                method: 'get',
+                maxBodyLength: Infinity,
+                url: 'http://localhost:8080/product',
+                headers: {}
+            };
+
+            axios(config)
+                .then(function (response) {
+
+                    const categories = response.data
+
+                    const options = categories.map(element => {
+                        return `<option value="${element.DESC_PROD}">${element.DESC_PROD}</option>`;
+                    });
+
+                    const select = document.getElementById('product');
+                    select.innerHTML = options.join('');
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        }
+
+        function viewOrder() {
+
+            var select = document.getElementById('order');
+            var selecionado = select.options[select.selectedIndex].value;
+            console.log('Opção selecionada: ' + selecionado);
+
+            axios.get(`http://localhost:8080/order/${selecionado}/products`)
+                .then(function (response) {
+                    var produtos = response.data;
+                    var listaProdutos = document.querySelector('#produtos-lista');
+                    var id = document.createAttribute("id");
+
+                    listaProdutos.innerHTML = produtos.map(function (produto) {
+                        return '<li> PRODUTO: <p id="product">' + produto.DESC_PROD + '<p> Quantidade: <p id="amount">' + produto.amount + '<p><br><label for="manufacture">Data de fabricação: </label><input type="date" id="manufacture"> <label for="validate">Data de validade:</label> <input type="date" id="validate"></li>';
+                    }).join('');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+        // função para processar o evento submit do formulário
+        function cadastrarEntrada(event) {
+            event.preventDefault(); // previne a ação padrão do evento submit
+
+            // cria um objeto com as informações do pedido, nota fiscal e produtos
+            const pedido = {
+                pedido: document.getElementById('order').value,
+                notaFiscal: document.getElementById('nota').value,
+                userId: localStorage.getItem("userLogged"),
+                products: []
+            };
+
+            document.querySelectorAll('#produtos-lista li').forEach(element => {
+
+                let
+                    product = element.querySelector('[id="product"]').textContent,
+                    amount = element.querySelector('[id="amount"]').textContent,
+                    dateManufacture = element.querySelector('input[type="date"][id="manufacture"]').value,
+                    dateValidate = element.querySelector('input[type="date"][id="validate"]').value,
+                    result = { product: product, amount: amount, Manufacture: dateManufacture, validate: dateValidate };
+
+                pedido.products.push(result);
+
+            });
+
+            console.log(pedido); // exibe o objeto no console para depuração
+
+            var data = Qs.stringify({
+                objEntry: pedido,
+
+            });
+
+            // envia o objeto para o servidor usando a biblioteca Axios
+            var config = {
+                method: 'post',
+                url: 'http://localhost:8080/stock',
+                headers: {},
+                data: data
+            };
+
+            axios(config)
+                .then(function (response) {
+
+                    if(response.data === "Algo deu errado. Tente novamente."){
+
+                        alert(JSON.stringify(response.data));
+                    }else{
+
+                        alert(JSON.stringify(response.data));
+                        window.location.href = "listUsers.html";
+                    }
+                })
+                .catch(function (error) {
+
+                    alert(JSON.stringify(response.data))
+                    console.log(error);
+                });
+        }
+
+        // adiciona um event listener ao formulário para interceptar o evento submit
+        document.getElementById('pedido-form').addEventListener('submit', cadastrarEntrada);
+
+    </script>
+</body>
+
+</html>

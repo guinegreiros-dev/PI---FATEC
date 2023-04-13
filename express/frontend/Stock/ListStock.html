@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estoque</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/express/frontend/editUser.html"></script>
+</head>
+
+<body onload="getStock()">
+  <button type="button" class="btn btn-danger p-3 m-3" onclick="window.location.href='../options.html'">Voltar</button>
+  <div class="container my-5">
+    <h1>Estoque</h1>
+    <a class='btn btn-primary btn-sm' href='EntryStock.html'>Registrar entrada</a>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Data da Movimentação</th>
+          <th>Movimentação</th>
+          <th>Quantidade</th>
+          <th>Nota Fiscal</th>
+          <th>Data da Fabricação</th>
+          <th>Data de Validade</th>
+          <th>Usuário</th>
+          <th>Código do pedido</th>
+          <th>Descrição do produto</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-corpo">
+        <!-- Conteúdo da tabela -->
+      </tbody>
+    </table>
+  </div>
+  <script>
+    function getStock() {
+
+      var config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:8080/Stock',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+      };
+
+      axios(config)
+        .then(function (response) {
+
+          const
+            data = response.data;
+
+          let tabelaCorpo = document.querySelector("#tabela-corpo");
+          data.forEach(function (stock) {
+            tabelaCorpo.innerHTML += `
+          <tr>
+            <td>${stock.stockId}</td>
+            <td>${stock.DAT_MOV}</td>
+            <td>${stock.TIPO_MOV}</td>
+            <td>${stock.QTD_MOV}</td>
+            <td>${stock.NF_E}</td>
+            <td>${stock.DAT_FABR}</td>
+            <td>${stock.DAT_VALI}</td>
+            <td>${stock.NOME_USER}</td>
+            <td>${stock.ID_PED}</td>
+            <td>${stock.DESC_PROD}</td>
+            <td><a class='btn btn-primary btn-sm' onclick="editUser('${stock.id_user}')"'>Marcar saída</a></td>
+            <td><a class='btn btn-primary btn-sm' onclick="editUser('${stock.id_user}')"'>Editar</a></td>
+            <td><a class='btn btn-danger btn-sm' onclick="deleteUser('${stock.id_user}')"'>Inativar</a></td>
+            <td><a class='btn btn-danger btn-sm' onclick="enableUser('${stock.id_user}')"'>Ativar</a></td>
+
+          </tr>
+        `;
+          });
+
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert("Algo deu errado.");
+        });
+    }
+
+    function deleteUser(userId) {
+
+      var config = {
+        method: 'delete',
+        maxBodyLength: Infinity,
+        url: `http://localhost:8080/user/${userId}`,
+        headers: {}
+      };
+
+      axios(config)
+        .then(function (response) {
+          alert(JSON.stringify(response.data));
+          location.reload()
+        })
+        .catch(function (error) {
+          alert(error);
+        });
+    }
+
+    function enableUser(userId) {
+
+
+      var config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `http://localhost:8080/user/${userId}`,
+        headers: {}
+      };
+
+      axios(config)
+        .then(function (response) {
+          alert(JSON.stringify(response.data));
+          location.reload()
+        })
+        .catch(function (error) {
+          alert(error);
+        });
+    }
+
+
+    function editUser(userId){
+
+      localStorage.setItem("id", userId);
+
+      window.location.href = `editUser.html`
+    }
+  </script>
+</body>
+
+</html>

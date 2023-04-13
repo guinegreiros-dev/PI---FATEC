@@ -1,6 +1,5 @@
 const
     orderModel = require('../Model/OrderModel'),
-    orderM = new orderModel(),
     Helper = require('../Helper');
 
 class Order extends orderModel {
@@ -15,22 +14,14 @@ class Order extends orderModel {
 
             let orderCreated = await super.create(objOrder.supplier);
 
-            console.log(orderCreated.insertId)
-
             for (const element of objOrder.produtos) {
 
+                let [productId] = await super.productIdByName(element.nome);
 
-                let [productId] = await super.productIdByName(element.nome)
+                productId = Object.values(productId);
 
-                productId = Object.values(productId[0])
-
-                
-                
+                await super.insertOrderProduct(orderCreated.insertId, productId[0], element.quantidade);
             }
-
-            console.log(objOrder);
-
-            
 
             return Helper.message("order", "created");
 
@@ -65,9 +56,12 @@ class Order extends orderModel {
         try {
 
             const
-                listProducts = await super.selectAllProducts();
+                listOrder = await super.listOrder();
 
-            listProducts.forEach(element => {
+            listOrder.forEach(element => {
+
+                element.DAT_PED = new Date(element.DAT_PED).toLocaleDateString("pt-br");
+
 
                 switch (element.status) {
                     case 1:
@@ -81,7 +75,7 @@ class Order extends orderModel {
                 }
             });
 
-            return listProducts;
+            return listOrder;
 
         } catch (error) {
 
@@ -94,11 +88,11 @@ class Order extends orderModel {
 
         try {
 
-            let { productId } = req.params
+            let { orderId } = req.params
 
-            await super.disable(productId);
+            await super.disable(orderId);
 
-            return Helper.message("product", "disable");
+            return Helper.message("order", "disable");
 
         } catch (error) {
             console.log(error);
@@ -109,11 +103,11 @@ class Order extends orderModel {
     async enable(req) {
         try {
 
-            let { productId } = req.params
+            let { orderId } = req.params
 
-            await super.enable(productId);
+            await super.enable(orderId);
 
-            return Helper.message("product", "enable");
+            return Helper.message("order", "enable");
 
         } catch (error) {
 
@@ -129,6 +123,21 @@ class Order extends orderModel {
             let
                 { productId } = req.params,
                 [result] = await super.specific(productId);
+
+            return result;
+
+        } catch (error) {
+            console.log(error);
+            return Helper.message("error", "generic");
+        }
+    }
+
+    async listProductByOrder(req) {
+        try {
+
+            let
+                { orderId } = req.params,
+                result = await super.productsByOrder(orderId);
 
             return result;
 

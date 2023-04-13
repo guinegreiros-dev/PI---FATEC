@@ -74,6 +74,8 @@
 						alert(JSON.stringify(response.data));
 					} else {
 
+						localStorage.setItem("userNameLogged", response.data.userName);
+						localStorage.setItem("userLogged", response.data.userId);
 						window.location.href = "options.html";
 					}
 

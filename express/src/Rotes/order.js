@@ -22,12 +22,12 @@ router.put('/', encoder,async(req,res) =>{
     res.send(await OrderC.edit(req));
 });
 
-router.delete('/:categoryId', encoder,async(req,res) =>{
+router.delete('/:orderId', encoder,async(req,res) =>{
 
     res.send(await OrderC.disable(req));
 });
 
-router.post('/:categoryId', encoder,async(req,res) =>{
+router.post('/:orderId', encoder,async(req,res) =>{
 
     res.send(await OrderC.enable(req));
 });
@@ -35,6 +35,11 @@ router.post('/:categoryId', encoder,async(req,res) =>{
 router.get('/:categoryId', encoder,async(req,res) =>{
 
     res.send(await OrderC.specific(req));
+});
+
+router.get('/:orderId/products', encoder,async(req,res) =>{
+
+    res.send(await OrderC.listProductByOrder(req));
 });
 
 module.exports = router

@@ -30,6 +30,8 @@ class Helper {
                         case "disable": result = "Produto desativado com sucesso."; break;
     
                         case "enable": result = "Produto ativado com sucesso."; break;
+
+                        case "entry": result = "Entrada de produtos realizada com sucesso."; break
                     }
                     break;
 
