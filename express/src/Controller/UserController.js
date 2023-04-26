@@ -2,6 +2,8 @@ const UserModel = require('../Model/UserModel');
 
 const UserM = new UserModel()
 
+const Helper = require('../Helper');
+
 class User {
 
     async login(req){
@@ -16,7 +18,15 @@ class User {
 
             if(!login) return "Falha no login."
 
-            return "Usuário logado."
+        
+            const test = {
+
+                message: "Usuário logado.",
+                userId: login.ID_USER,
+                userName: login.NOME_USER
+            }
+
+            return test
             
         } catch (error) {
 
@@ -26,7 +36,23 @@ class User {
 
     async getAllUsers() {
 
-        return await UserM.allUsers();
+        try {
+
+            let result = await UserM.allUsers();
+
+            result.forEach(element => {
+                
+                if(element.status === 1) element.status = "Ativo";
+                if(element.status === 0) element.status = "Inativo";
+            });
+            
+            return result
+            
+        } catch (error) {
+            console.log(error);
+            Helper.message("error", "generic")
+        }
+
     }
 
     async getSpecificUsers(req) {

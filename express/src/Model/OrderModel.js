@@ -37,38 +37,22 @@ class Order {
         return rows
     }
 
-    async orderIdCreated(productName) {
+    async insertOrderProduct(orderId, productId, amount) {
 
         const
             execute = await mysql;
 
         let [rows] = await execute.query(`
-        SELECT 
-            ID_PROD 
-        FROM 
-            tb_produtos 
-        WHERE 
-            DESC_PROD = ?
+        INSERT INTO 
+            pedidos_produtos (
+                orderId, 
+                productId, 
+                amount
+                ) 
+                VALUES (?, ?, ?);
+
         `,
-            [productName]);
-
-        return rows
-    }
-
-    async insertOrderProduct(productName) {
-
-        const
-            execute = await mysql;
-
-        let [rows] = await execute.query(`
-        SELECT 
-            ID_PROD 
-        FROM 
-            tb_produtos 
-        WHERE 
-            DESC_PROD = ?
-        `,
-            [productName]);
+            [orderId, productId, amount]);
 
         return rows
     }
@@ -94,46 +78,41 @@ class Order {
         return rows
     }
 
-    async selectAllCategories() {
+    async listOrder() {
 
         const
             execute = await mysql;
 
         let [rows] = await execute.query(`
-        SELECT
-        ID_CATEGORIA,
-        NOME_CATEGORIA,
-        CASE
-            WHEN TEM_VAL = 1 THEN 'sim'
-            WHEN TEM_VAL = 0 THEN 'não'
-        END
-        TEM_VAL,
-        DIAS_AVISO,
-        QUANT_MINIMA,
-        status
-        FROM gestao_estoque.tb_categorias 
-        ORDER BY ID_CATEGORIA DESC
+        SELECT 
+            ID_PED, 
+            NOME_FORNE, 
+            DAT_PED, 
+            tb_pedidos.status 
+        FROM 
+            tb_pedidos 
+        INNER JOIN 
+            tb_fornecedores ON ID_FORNE = FK_TB_FORNECEDORES_ID_FORNE
         `);
-
         return rows
     }
 
-    async disable(categorId) {
+    async disable(orderId) {
 
         const
             execute = await mysql;
 
-        let [rows] = await execute.query(`UPDATE tb_categorias SET status = 0 WHERE (ID_CATEGORIA = ?);`, [categorId]);
+        let [rows] = await execute.query(`UPDATE tb_pedidos SET status = 0 WHERE (ID_PED = ?);`, [orderId]);
 
         return rows
     }
 
-    async enable(categoryId) {
+    async enable(orderId) {
 
         const
             execute = await mysql;
 
-        let [rows] = await execute.query(`UPDATE tb_categorias SET status = 1 WHERE (ID_CATEGORIA  = ?);`, [categoryId]);
+        let [rows] = await execute.query(`UPDATE tb_pedidos SET status = 1 WHERE (ID_PED = ?);`, [orderId]);
 
         return rows
     }
@@ -154,6 +133,36 @@ class Order {
         WHERE
             ID_CATEGORIA = ?
         `, [supplierId]);
+
+        return rows
+    }
+
+    async productsByOrder(orderId) {
+
+        const
+            execute = await mysql;
+
+        let [rows] = await execute.query(`
+        SELECT 
+            DESC_PROD,
+            amount
+        FROM 
+            tb_pedidos 
+        INNER JOIN 
+            tb_fornecedores 
+        ON 
+            ID_FORNE = FK_TB_FORNECEDORES_ID_FORNE
+        INNER JOIN 
+            pedidos_produtos 
+        ON 
+            pedidos_produtos.orderId = tb_pedidos.ID_PED
+        INNER JOIN 
+            tb_produtos 
+        ON 
+            tb_produtos.ID_PROD = pedidos_produtos.productId
+        WHERE 
+            orderId = ?
+        `, [orderId]);
 
         return rows
     }

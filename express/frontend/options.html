@@ -10,6 +10,7 @@
         <title>Tela Inicial</title>
     </head>
 <body>
+    <p id="mensagem" class="mensagem"></p>
     <button type="button" class="btn btn-danger p-3 m-3" onclick="window.location.href='login.html'">Sair</button>
     <div class="container text-center">
 
@@ -62,4 +63,14 @@
 
 </div>
 </body>
+
+<script>
+
+    let userName = localStorage.getItem("userNameLogged");
+    let outroElemento = document.getElementById("mensagem");
+    
+    outroElemento.textContent = `Olá, ${userName}, seja bem-vindo!`;
+
+</script>
+
 </html>

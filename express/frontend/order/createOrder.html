@@ -10,7 +10,8 @@
 </head>
 
 <body onload="suppliers(), products()">
-    <h1>Cadastro de Pedidos</h1>
+    <button type="button" class="btn btn-danger p-3 m-3" onclick="window.location.href='ListOrder.html'">Voltar</button>
+    <h1>Cadastro de Pedido</h1>
     <form id="pedido-form">
         <label for="nome-cliente">Nome do Fornecedor:</label>
         <select id="supplier" name=""></select><br><br>
@@ -90,6 +91,7 @@
             axios(config)
                 .then(function (response) {
                     alert(JSON.stringify(response.data));
+                    window.location.href = "ListOrder.html";
                 })
                 .catch(function (error) {
                     console.log(error);
