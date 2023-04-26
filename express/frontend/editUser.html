@@ -15,36 +15,43 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
     crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="HTElements/css/custom.css">
 </head>
 
-<body onload="userInfo(userId)">
-  <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='listUsers.html'">Voltar</button>
-
-  <h1>Edição de usuário</h1>
+<body onload="userInfo(userId)" style="height: 100vh; display: flex; justify-content: center; align-items: center;">
+  <div style="position: absolute; top: 20px; left: 20px;">
+    <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='listUsers.html'">
+      <img src="HTElements/icons/arrow-282-64.png">
+    </button>
+  </div>
+  <div class="mx-auto" style="width: 20%;">
+  <h2 class="text-center">Edição de Usuário</h1>
   <form>
-    <div>
-      <label for="nome">Login de acesso:</label>
-      <input type="text" id="loginUser" name="nome">
+    <div class="mb-3">
+      <label for="loginUser" class="form-label">Login de acesso:</label>
+      <input type="text" class="form-control" id="loginUser" name="nome">
     </div>
-    <div>
-      <label for="email">Nome:</label>
-      <input type="text" id="nomeUser" name="email">
+    <div class="mb-3">
+      <label for="nomeUser" class="form-label">Nome:</label>
+      <input type="text" class="form-control" id="nomeUser" name="email">
     </div>
-    <div>
-      <label for="nome">password:</label>
-      <input type="password" id="passwordUser" name="nome">
+    <div class="mb-3">
+      <label for="passwordUser" class="form-label">Password:</label>
+      <input type="password" class="form-control" id="passwordUser" name="nome">
     </div>
-      <div>
-        <label for="nome">Tipo do usuário:</label>
-        <input type="text" id="typeUserId" list="typeUserList" name="nome">
-        <datalist id="typeUserList">
-          <option value="gerente">
-          <option value="funcionário">
-      </datalist>
-      </div>
+    <div class="mb-3">
+      <label for="typeUserId" class="form-label">Tipo do usuário:</label>
+      <select class="form-select" id="typeUserId" name="typeUser">
+        <option value="">Selecione um tipo de usuário</option>
+        <option value="Gerente">Gerente</option>
+        <option value="Funcionário">Funcionário</option>
+      </select>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary" onclick="updateUser()">Atualizar</button>
+    </div>
   </form>
-  <button type="submit" onclick="updateUser()">Atualizar</button>
-
+</div>
 
   <script>
 

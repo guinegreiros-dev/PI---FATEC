@@ -1,3 +1,8 @@
+
+
+body {
+    background-color: #ffdadb;
+}
 .conteudo {
     /* set a min-height to ensure that the content takes up at least the height of the viewport */
     min-height: 80vh;
@@ -27,5 +32,10 @@
   }
   
   .btn:hover {
-    padding: 0.7rem 1.2rem;
+    padding: 0.7rem 1.1rem;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
   }
