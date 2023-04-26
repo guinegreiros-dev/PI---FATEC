@@ -19,34 +19,33 @@
 
 <body>
   <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='listUsers.html'">Voltar</button>
-
+<div class="container">
   <h1>Cadastro</h1>
-  <form>
-    <div>
-      <label for="nome">Login de acesso:</label>
-      <input type="text" id="loginUser" name="nome">
-    </div>
-    <div>
-      <label for="email">Nome:</label>
-      <input type="text" id="nomeUser" name="email">
-    </div>
-    <div>
-      <label for="nome">password:</label>
-      <input type="password" id="passwordUser" name="nome">
-    </div>
-    <div>
-      <div>
-        <label for="nome">Tipo do usuário:</label>
-        <input type="text" id="typeUserId" list="typeUserList" name="nome">
-        <datalist id="typeUserList">
-          <option value="Gerente">
-          <option value="Funcionário">
-      </datalist>
-      </div>
-      <div>
-
-        <button type="submit" onclick="enviarInformacoes()">Enviar</button>
-  </form>
+<form>
+  <div class="mb-3">
+    <label for="loginUser" class="form-label">Login de acesso:</label>
+    <input type="text" class="form-control" id="loginUser" name="nome">
+  </div>
+  <div class="mb-3">
+    <label for="nomeUser" class="form-label">Nome:</label>
+    <input type="text" class="form-control" id="nomeUser" name="email">
+  </div>
+  <div class="mb-3">
+    <label for="passwordUser" class="form-label">Senha:</label>
+    <input type="password" class="form-control" id="passwordUser" name="nome">
+  </div>
+  <div class="mb-3">
+    <label for="typeUserId" class="form-label">Tipo do usuário:</label>
+    <select class="form-select" id="typeUserId" name="typeUser">
+      <option value="">Selecione um tipo de usuário</option>
+      <option value="Gerente">Gerente</option>
+      <option value="Funcionário">Funcionário</option>
+    </select>
+  </div>
+  
+  <button type="submit" class="btn btn-primary" onclick="enviarInformacoes()">Enviar</button>
+</form>
+</div>
 
   <script>
     function enviarInformacoes() {
