@@ -1,8 +1,15 @@
-.nav{
+.nav div{
 
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
+
+.mensagem {
+
+        display: flex;
+        justify-content: flex-end;
+        font-size: 1.5em;
+    }
 
 .pop-up{
 

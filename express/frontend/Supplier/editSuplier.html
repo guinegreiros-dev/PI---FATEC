@@ -9,6 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="../HTElements/css/custom.css">
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
     crossorigin="anonymous"></script>
@@ -17,46 +18,93 @@
     crossorigin="anonymous"></script>
 </head>
 
-<body onload="supplierInfo(supplierId)">
-  <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='ListSupplier.html'">Voltar</button>
-  <h1>Edição de Fornecedor</h1>
-  <form>
-    <div>
-      <label for="nome">Nome: </label>
-      <input type="text" id="nameSupplier" name="nome">
+<body onload="supplierInfo(supplierId)"
+  style="height: 100vh; display: flex; justify-content: center; align-items: center;">
+  <div style="position: absolute; top: 20px; left: 20px;">
+    <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='ListSupplier.html'">
+      <img src="../HTElements/icons/arrow-282-64.png">
+    </button>
+  </div>
+  <div class="mx-auto" style="width: 40%;">
+    <h2 class="text-center">Edição de Fornecedor</h2>
+    <form>
+      <div class="form-group">
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome: </label>
+          <input type="text" class="form-control" id="nameSupplier" name="nome" required>
+        </div>
+        <div class="row mb-3">
+          <div class="col-7">
+            <label for="cnpj" class="form-label">CNPJ:</label>
+            <input type="number" maxlength="14" pattern="[0-9]*" class="form-control" id="cnpjSupplier" name="cnpj">
+          </div>
+          <div class="col">
+            <label for="cpf" class="form-label">CPF:</label>
+            <input type="number" maxlength="11" pattern="[0-9]*" class="form-control" id="cpfSupplier" name="cpf">
+          </div>
+        </div>
+        <div class="mb-3">
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <label for="cep" class="form-label">CEP:</label>
+            <input type="number" pattern="[0-9]*" maxlength="8" class="form-control" id="cepSupplier" name="cep"
+              required>
+          </div>
+          <div class="col-6">
+            <label for="endereco" class="form-label">Endereço:</label>
+            <input type="text" class="form-control" id="addressSupplier" name="endereco" required>
+          </div>
+          <div class="col-2">
+            <label for="numero" class="form-label">Número:</label>
+            <input type="number" pattern="[0-9]*" class="form-control" id="numberAdressSupplier" name="numero">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <label for="tel" class="form-label">Telefone:</label>
+            <input type="number" pattern="[0-9]*" maxlength="11" class="form-control" id="phoneSupplier" name="tel"
+              required>
+          </div>
+          <div class="col-2">
+            <label for="uf" class="form-label">UF:</label>
+            <select class="form-control" id="ufSupplier" name="UF" required>
+              <option value="AC">AC</option>
+              <option value="AL">AL</option>
+              <option value="AP">AP</option>
+              <option value="AM">AM</option>
+              <option value="BA">BA</option>
+              <option value="CE">CE</option>
+              <option value="DF">DF</option>
+              <option value="ES">ES</option>
+              <option value="GO">GO</option>
+              <option value="MA">MA</option>
+              <option value="MT">MT</option>
+              <option value="MS">MS</option>
+              <option value="MG">MG</option>
+              <option value="PA">PA</option>
+              <option value="PB">PB</option>
+              <option value="PR">PR</option>
+              <option value="PE">PE</option>
+              <option value="PI">PI</option>
+              <option value="RJ">RJ</option>
+              <option value="RN">RN</option>
+              <option value="RS">RS</option>
+              <option value="RO">RO</option>
+              <option value="RR">RR</option>
+              <option value="SC">SC</option>
+              <option value="SP">SP</option>
+              <option value="SE">SE</option>
+              <option value="TO">TO</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary" onclick="updateSupplier()">Atualizar</button>
     </div>
-    <div>
-      <label for="email">CNPJ:</label>
-      <input type="text" id="cnpjSupplier" name="email">
-    </div>
-    <div>
-      <label for="email">CPF:</label>
-      <input type="text" id="cpfSupplier" name="email">
-    </div>
-    <div>
-      <label for="email">CEP:</label>
-      <input type="text" id="cepSupplier" name="email">
-    </div>
-    <div>
-      <label for="email">Endereço:</label>
-      <input type="text" id="addressSupplier" name="email">
-    </div>
-    <div>
-      <label for="email">Número:</label>
-      <input type="text" id="numberAdressSupplier" name="email">
-    </div>
-    <div>
-      <label for="email">Telefone:</label>
-      <input type="text" id="phoneSupplier" name="email">
-    </div>
-    <div>
-      <label for="email">UF:</label>
-      <input type="text" id="ufSupplier" name="email">
-    </div>
-  </form>
-  <button type="submit" onclick="updateSupplier()">Atualizar</button>
-
-
+  </div>
   <script>
 
     let supplierId = localStorage.getItem("supplierId");
@@ -97,11 +145,11 @@
         cnpjSupplier = document.getElementById("cnpjSupplier").value,
         cpfSupplier = document.getElementById("cpfSupplier").value,
         cepSupplier = document.getElementById("cepSupplier").value;
-        addressSupplier = document.getElementById("addressSupplier").value;
-        numberAdressSupplier = document.getElementById("numberAdressSupplier").value;
-        phoneSupplier = document.getElementById("phoneSupplier").value;
-        ufSupplier = document.getElementById("ufSupplier").value;
-        
+      addressSupplier = document.getElementById("addressSupplier").value;
+      numberAdressSupplier = document.getElementById("numberAdressSupplier").value;
+      phoneSupplier = document.getElementById("phoneSupplier").value;
+      ufSupplier = document.getElementById("ufSupplier").value;
+
 
       var data = Qs.stringify({
 
