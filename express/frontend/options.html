@@ -13,23 +13,36 @@
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
         crossorigin="anonymous"></script>
     <title>Tela Inicial</title>
+    <link rel="stylesheet" href="options.css">
 </head>
 
 <style>
-
-    .mensagem{
+    .mensagem {
 
         display: flex;
         justify-content: flex-end;
         font-size: 2em;
     }
-
-
 </style>
 
 <body>
-    <p id="mensagem" class="mensagem"></p>
-    <button type="button" class="btn btn-danger p-3 m-3" onclick="window.location.href='login.html'">Sair</button>
+    <section class="nav">
+        <button type="button" class="btn btn-danger p-3 m-3" onclick="window.location.href='login.html'">Sair</button> 
+        <div>
+            <p id="mensagem" class="mensagem"></p>
+            <a href="#" id="lista-anchor">Abrir lista</a>
+            <div id="lista-popup">
+                <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                </ul>
+            </div>
+        </div> 
+    </section>
+
+
+
     <div class="container text-center">
         <h2 class="mb-4">Gerenciador de Estoque</h2>
         <button class="btn btn-primary mb-3"
@@ -47,9 +60,22 @@
 
 <script>
 
+    const listaAnchor = document.getElementById('lista-anchor');
+    const listaPopup = document.getElementById('lista-popup');
+
+    listaAnchor.addEventListener('click', function () {
+        listaPopup.style.display = 'block';
+    });
+
+    document.addEventListener('click', function (event) {
+        if (event.target !== listaAnchor && event.target !== listaPopup) {
+            listaPopup.style.display = 'none';
+        }
+    });
+
     let userName = localStorage.getItem("userNameLogged");
     let outroElemento = document.getElementById("mensagem");
-    
+
     outroElemento.textContent = `Olá, ${userName}, seja bem-vindo!`;
 
 </script>
