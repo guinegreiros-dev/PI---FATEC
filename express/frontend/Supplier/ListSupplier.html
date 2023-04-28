@@ -7,6 +7,7 @@
   <title>Fornecedores</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../HTElements/css/custom.css">
+  <link rel="stylesheet" href="../HTElements/css/supplier.css">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="/express/frontend/editUser.html"></script>
 </head>
@@ -17,10 +18,9 @@
     <img src="../HTElements/icons/arrow-282-64.png">
     </button>
   </div>
-    </button>
   </div>
   <div class="container my-5">
-    <div class="container-fluid mx-auto d-flex flex-column" style="width: 80%;">
+    <div class="container-fluid mx-auto d-flex flex-column">
       <h1 class="text-center justify-content-center">Lista de Fornecedores</h1>
       <div class="d-flex">
         <a id="AddUser" class='btn btn-primary btn-sm' href='addSupplier.html'>
@@ -30,22 +30,36 @@
       <br>
       <table class="table-responsive">
         <thead>
-          <tr>
+          <tr class="text-center">
             <th>ID</th>
             <th>Nome</th>
             <th>CNPJ</th>
             <th>CPF</th>
             <th>CEP</th>
             <th>Endereço</th>
-            <th>Número</th>
+            <th>Nº</th>
             <th>Telefone</th>
             <th>UF</th>
             <th>Status</th>
+            <th>Editar</th>
+            <th>Inativar</th>
+            <th>Ativar</th>
           </tr>
         </thead>
         <tbody id="tabela-corpo">
-          <!-- Conteúdo da tabela -->
-        </tbody>
+          <td>12</td>
+          <td>Arruda Alimentos</td>
+          <td>11111111111111</td>
+          <td>33333333333</td>
+          <td>07713010</td>
+          <td>Alameda Santos Drummond, Vila Velha, Jundiaí</td>
+          <td>1000</td>
+          <td>1144452705</td>
+          <td>SP</td>
+          <td>Ativo</td>
+          <td class="text-center"><a class='btn btn-primary btn-sm'><img src='../HTElements/icons/pencil-2-24.png'></a></td>
+          <td class="text-center"><a class='btn btn-danger btn-sm'><img src='../HTElements/icons/power-24.png'></a></td>
+          <td class="text-center"><a class='btn btn-success btn-sm' ><img src='../HTElements/icons/power-24.png'></a></td>        </tbody>
       </table>
     </div>
   </div>

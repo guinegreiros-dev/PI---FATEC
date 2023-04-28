@@ -7,6 +7,7 @@
   <title>Usuários</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="HTElements/css/custom.css">
+  <link rel="stylesheet" href="HTElements/css/user.css">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="/express/frontend/editUser.html"></script>
 </head>
@@ -27,11 +28,14 @@
   <br><br>
   <table class="table-responsive">
     <thead>
-      <tr>
+      <tr class="text-center">
         <th>ID</th>
         <th>Nome</th>
         <th>Nível</th>
         <th>Status</th>
+        <th>Editar</th>
+        <th>Inativar</th>
+        <th>Ativar</th>
       </tr>
     </thead>
     <tbody id="tabela-corpo">
@@ -72,10 +76,10 @@
               Editar</a>
               </td>
             <td><a class='btn btn-danger btn-sm' onclick="deleteUser('${usuario.id_user}')"'>
-              <img src='HTElements/icons/power-4-24.png'>
+              <img src='HTElements/icons/power-24.png'>
               Inativar</a>
               </td>
-            <td><a class='btn btn-danger btn-sm' onclick="enableUser('${usuario.id_user}')"'>
+            <td><a class='btn btn-success btn-sm' onclick="enableUser('${usuario.id_user}')"'>
               <img src='HTElements/icons/power-24.png'>
               Ativar</a>
               </td>

@@ -6,53 +6,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pedido</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../HTElements/css/custom.css">
+  <link rel="stylesheet" href="../HTElements/css/order.css">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.2/dist/purify.min.js"></script>
-  <style>
-    .produtos-popup {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px;
-      height: 400px;
-      background-color: white;
-      border: 1px solid black;
-      padding: 10px;
-      display: none;
-    }
-  </style>
 </head>
 
 <body onload="getAllProducts()">
-  <button type="button" class="btn btn-danger p-3 m-3" onclick="window.location.href='../options.html'">Voltar</button>
-  <div class="container my-5">
-    <h1>Lista de Pedidos</h1>
-    <a class='btn btn-primary btn-sm' href='createOrder.html'>Novo pedido</a>
-    <br>
-    <table style="width: 100%; height: 500px;">
+  <div style="position: absolute; top: 20px; left: 20px;">
+    <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='../options.html'">
+    <img src="../HTElements/icons/arrow-282-64.png">
+    </button>
+  </div>
+  <div class="backdrop"></div>
+        </div>
+  <div class="container-fluid mx-auto d-flex flex-column" style="width: 80%;">
+    <h1 class="text-center justify-content-center">Lista de Pedidos</h1>
+    <div class="d-flex pb-3">
+      <a id="createOrder" class='btn btn-primary btn-sm' href='createOrder.html'>
+        <img src="../HTElements/icons/plus-5-24.png">
+        Criar Pedido</a>
+    </div>
+    <table class="table-responsive">
       <thead>
-        <tr>
+        <tr class="text-center">
           <th>ID</th>
           <th>Fornecedor</th>
           <th>Data do pedido</th>
           <th>Status</th>
+          <th>Ver pedido</th>
+          <th>Inativar</th>
+          <th>Ativar</th>
         </tr>
       </thead>
       <tbody id="tabela-corpo">
-        <!-- Conteúdo da tabela -->
-      </tbody>
+        <tr class="text-center">
+            <td>${order.ID_PED}</td>
+            <td>${order.NOME_FORNE}</td>
+            <td>${order.DAT_PED}</td>
+            <td>${order.status}</td>
+            <td><a class='btn btn-primary btn-sm' onclick="viewOrder('${order.ID_PED}')"'><img src="../HTElements/icons/eye-2-24.png" alt=""></a></td>
+            <td><a class='btn btn-danger btn-sm' onclick="deleteOrder('${order.ID_PED}')"'><img src="../HTElements/icons/power-24.png" alt=""></a></td>
+            <td><a class='btn btn-success btn-sm' onclick="enableOrder('${order.ID_PED}')"'><img src="../HTElements/icons/power-24.png" alt=""></a></td>
+        </tr>
+          </tbody>
     </table>
+  </div>
   </div>
   <div id="produtos-popup" class="produtos-popup">
     <h3>Produtos do Pedido</h3>
-    <ul id="lista-produtos"></ul>
-    <button onclick="fecharProdutos()">Fechar</button>
+    <ul id="lista-produtos">
+    </ul>
+    <button class="fecha-popup" onclick="fecharProdutos()">&times;</button>
     <button type="button" class="btn btn-primary btn-sm" id="gerar-pdf">Gerar PDF</button>
   </div>
   <script>
+    const backdrop = document.querySelector('.backdrop')
+
     document.getElementById("gerar-pdf").addEventListener("click", function () {
       const lista = document.getElementById("lista-produtos");
       const titulo = document.querySelector("#h4Forne");
@@ -90,14 +102,14 @@
 
           data.forEach(function (order) {
             tableFront.innerHTML += `
-          <tr>
+          <tr class='text-center'>
             <td>${order.ID_PED}</td>
             <td>${order.NOME_FORNE}</td>
             <td>${order.DAT_PED}</td>
             <td>${order.status}</td>
             <td><a class='btn btn-primary btn-sm' onclick="viewOrder('${order.ID_PED}')"'>Ver pedido</a></td>
             <td><a class='btn btn-danger btn-sm' onclick="deleteOrder('${order.ID_PED}')"'>Inativar</a></td>
-            <td><a class='btn btn-danger btn-sm' onclick="enableOrder('${order.ID_PED}')"'>Ativar</a></td>
+            <td><a class='btn btn-success btn-sm' onclick="enableOrder('${order.ID_PED}')"'>Ativar</a></td>
           </tr>
         `;
           });
@@ -165,6 +177,7 @@
             return '<li> Produto: '+ produto.DESC_PROD + ' - Quantidade: ' + produto.amount + '</li>';
           }).join('');
           produtosDiv.style.display = "block";
+          backdrop.style.display = "block";
         })
         .catch(function (error) {
           console.log(error);
@@ -174,8 +187,14 @@
     function fecharProdutos() {
       var produtosDiv = document.querySelector('#produtos-popup');
       produtosDiv.style.display = "none";
+      backdrop.style.display = "none";
     }
+    backdrop.addEventListener('click', (event) => {
+      fecharProdutos();
+    })
   </script>
+
+  <script></script>
 </body>
 
 </html>
