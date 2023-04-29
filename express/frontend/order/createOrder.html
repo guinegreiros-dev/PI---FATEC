@@ -76,6 +76,8 @@
             const produtoTexto = document.createTextNode(`${produtoSelecionado} - ${quantidade.value} `);
             const removerBtn = document.createElement("button");
             removerBtn.textContent = "Remover";
+            removerBtn.classList.add("btn");
+            removerBtn.classList.add("btn-danger");
             removerBtn.addEventListener("click", () => {
                 produtos.splice(produtos.findIndex(p => p.nome === produtoSelecionado && p.quantidade === quantidade.value), 1);
                 produtosLista.removeChild(produtoLi);

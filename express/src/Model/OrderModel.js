@@ -93,6 +93,7 @@ class Order {
             tb_pedidos 
         INNER JOIN 
             tb_fornecedores ON ID_FORNE = FK_TB_FORNECEDORES_ID_FORNE
+        ORDER BY ID_PED DESC
         `);
         return rows
     }
