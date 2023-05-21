@@ -21,6 +21,19 @@ td {
     display: none;
 }
 
+#historic-popup{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
 #produtos-popup ul {
     list-style: none;
     padding: 0;

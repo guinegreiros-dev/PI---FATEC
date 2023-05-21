@@ -5,7 +5,7 @@ class User{
 
         const mysql = await require('../../connection');
 
-        let [rows] =  await mysql.query("SELECT * FROM tb_usuarios WHERE login_user = ? AND senha_user = ?", [loginUser, passwordUser]);
+        let [rows] =  await mysql.query("SELECT * FROM tb_usuarios AS u INNER JOIN tb_tipo_usuarios AS tu ON tu.ID_TIPO_USER = u.FK_TB_TIPO_USUARIOS_ID_TIPO_USER WHERE login_user = ? AND senha_user = ?", [loginUser, passwordUser]);
 
         return rows
     }
@@ -83,6 +83,5 @@ class User{
 
         return rows
     }
-
     
 } module.exports = User;

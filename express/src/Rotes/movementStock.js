@@ -15,7 +15,23 @@ router.post('/', encoder,async(req,res) =>{
 router.get('/', encoder,async(req,res) =>{
 
     res.send(await StockC.list(req, res));
-});  
+});
+
+router.delete('/exit', encoder,async(req,res) =>{
+
+    res.send(await StockC.exitStock(req, res));
+});
+
+router.get('/log/:stockId', encoder,async(req,res) =>{
+
+    res.send(await StockC.listLogSpecficId(req, res));
+});
+
+router.get('/alert', encoder,async(req,res) =>{
+
+    res.send(await StockC.alertMain(req, res));
+});
+  
 
 // router.put('/', encoder,async(req,res) =>{
 

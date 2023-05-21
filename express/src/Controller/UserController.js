@@ -23,7 +23,8 @@ class User {
 
                 message: "Usuário logado.",
                 userId: login.ID_USER,
-                userName: login.NOME_USER
+                userName: login.NOME_USER,
+                userType: login.NOME_TIPO_USER
             }
 
             return test

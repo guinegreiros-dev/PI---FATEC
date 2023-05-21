@@ -6,8 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Estoque</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="/express/frontend/editUser.html"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../HTElements/css/custom.css">
+  <link rel="stylesheet" href="../HTElements/css/order.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.2/dist/purify.min.js"></script>
 </head>
 
 <body onload="getStock()">
@@ -35,6 +43,21 @@
         <!-- Conteúdo da tabela -->
       </tbody>
     </table>
+  </div>
+  <div id="produtos-popup" class="produtos-popup">
+    <h3>Quantidade</h3>
+    <ul id="lista-produtos">
+    </ul>
+    <input type="number" id="amount">
+    <button class="fecha-popup" onclick="fecharProdutos()">&times;</button>
+    <button type="button" class="btn btn-primary btn-sm" id="gerar-pdf" onclick="exitStock()">Retirar</button>
+  </div>
+  <div id="historic-popup" class="historic-popup">
+    <h3>Test</h3>
+    <ul id="list-historic">
+    </ul>
+    <ul></ul>
+    <button class="fecha-popup" onclick="closeHistoric()">&times;</button>
   </div>
   <script>
     function getStock() {
@@ -68,11 +91,9 @@
             <td>${stock.NOME_USER}</td>
             <td>${stock.ID_PED}</td>
             <td>${stock.DESC_PROD}</td>
-            <td><a class='btn btn-primary btn-sm' onclick="editUser('${stock.id_user}')"'>Marcar saída</a></td>
-            <td><a class='btn btn-primary btn-sm' onclick="editUser('${stock.id_user}')"'>Histórico</a></td>
+            <td><a class='btn btn-primary btn-sm' onclick="exit('${stock.stockId}')"'>Marcar saída</a></td>
+            <td><a class='btn btn-primary btn-sm' onclick="viewHistoric('${stock.stockId}')"'>Histórico</a></td>
             <td><a class='btn btn-primary btn-sm' onclick="editUser('${stock.id_user}')"'>Editar</a></td>
-            <td><a class='btn btn-danger btn-sm' onclick="deleteUser('${stock.id_user}')"'>Inativar</a></td>
-            <td><a class='btn btn-danger btn-sm' onclick="enableUser('${stock.id_user}')"'>Ativar</a></td>
           </tr>
         `;
           });
@@ -84,52 +105,106 @@
         });
     }
 
-    function deleteUser(userId) {
+    function exit(stockId) {
 
-      var config = {
+      localStorage.setItem("stockId", stockId);
+
+      var listaProdutos = document.querySelector('#list-historic');
+      var produtosDiv = document.querySelector('#produtos-popup');
+      var id = document.createAttribute("id");
+
+      const
+        minhaDiv = document.querySelector('#produtos-popup'),
+        h4 = document.createElement('h4');
+
+      axios.get(`http://localhost:8080/order/${2}/products`)
+        .then(function (response) {
+          var produtos = response.data;
+
+          listaProdutos.innerHTML = produtos.map(function (produto) {
+            return '<li> Produto: ' + produto.DESC_PROD + ' - Quantidade: ' + produto.amount + '</li>';
+          }).join('');
+          produtosDiv.style.display = "block";
+          backdrop.style.display = "block";
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    function viewHistoric(stockId) {
+
+      stockId = parseInt(stockId)
+
+      var listaProdutos = document.querySelector('#list-historic');
+      var produtosDiv = document.querySelector('#historic-popup');
+      var id = document.createAttribute("id");
+
+      const
+        minhaDiv = document.querySelector('#historic-popup'),
+        h4 = document.createElement('h4');
+
+      axios.get(`http://localhost:8080/stock/log/${stockId}`)
+        .then(function (response) {
+          var historic = response.data;
+
+          listaProdutos.innerHTML = historic.map(function (message) {
+            return `<li>${message.response}</li>`;
+          }).join('');
+          produtosDiv.style.display = "block";
+          backdrop.style.display = "block";
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    function fecharProdutos() {
+      var produtosDiv = document.querySelector('#produtos-popup');
+      produtosDiv.style.display = "none";
+      backdrop.style.display = "none";
+    }
+
+    function closeHistoric() {
+      var produtosDiv = document.querySelector('#historic-popup');
+      produtosDiv.style.display = "none";
+      backdrop.style.display = "none";
+    }
+
+
+    function exitStock() {
+
+      let
+        stockId = localStorage.getItem("stockId");
+      amount = document.getElementById("amount").value;
+      userId = localStorage.getItem("userLogged");
+
+      let data = Qs.stringify({
+        'stockId': stockId,
+        'amount': amount,
+        'userId': userId
+      });
+
+      let config = {
         method: 'delete',
         maxBodyLength: Infinity,
-        url: `http://localhost:8080/user/${userId}`,
-        headers: {}
+        url: 'http://localhost:8080/stock/exit',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: data
       };
 
-      axios(config)
-        .then(function (response) {
+      axios.request(config)
+        .then((response) => {
           alert(JSON.stringify(response.data));
-          location.reload()
+          window.location.reload()
         })
-        .catch(function (error) {
-          alert(error);
+        .catch((error) => {
+          console.log(error);
         });
     }
 
-    function enableUser(userId) {
-
-
-      var config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: `http://localhost:8080/user/${userId}`,
-        headers: {}
-      };
-
-      axios(config)
-        .then(function (response) {
-          alert(JSON.stringify(response.data));
-          location.reload()
-        })
-        .catch(function (error) {
-          alert(error);
-        });
-    }
-
-
-    function editUser(userId){
-
-      localStorage.setItem("id", userId);
-
-      window.location.href = `editUser.html`
-    }
   </script>
 </body>
 

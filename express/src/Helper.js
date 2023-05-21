@@ -60,7 +60,21 @@ class Helper {
                                 case "enable": result = "Pedido ativado com sucesso."; break;
                             }
                             break;
-                            
+
+                            case "stock":
+                                switch (reason) {
+
+                                    case "exit": result = "Transferência realizada com sucesso."; break;
+                
+                                    // case "logExit": result = "Pedido cadastrado com sucesso."; break;
+                
+                                    // case "edited": result = "Pedido editado com sucesso."; break;
+                
+                                    // case "disable": result = "Pedido desativado com sucesso."; break;
+                
+                                    // case "enable": result = "Pedido ativado com sucesso."; break;
+                                }
+                                break;
                         
             case "error":
                 switch (reason) {
