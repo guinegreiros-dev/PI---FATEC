@@ -7,25 +7,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="../HTElements/css/custom.css">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../HTElements/css/cadastro.css">
 </head>
 
 <body onload="order(), products()">
-    <button type="button" class="btn btn-danger p-3 m-3" onclick="window.location.href='listStock.html'">Voltar</button>
-    <h1>Entrada de produto</h1>
-    <form id="pedido-form">
-        <label for="order">Pedido:</label>
-        <select id="order" name="" onchange="viewOrder()"></select><br><br>
-        <label>Nota fiscal:</label>
-        <input type="number" id="nota" name="nota" />
+    <div style="position: absolute; top: 20px; left: 20px;">
+        <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='ListSupplier.html'">
+          <img src="../HTElements/icons/arrow-282-64.png">
+        </button>
+      </div>    
+      
+      <div class="mx-auto" style="width: 20%;">
+      <form id="pedido-form">
+    <div class="form-group">
+  <div class="mb-3">
+    <label for="order">Pedido:</label>
+    <select class="form-select" id="order" name="" onchange="viewOrder()"></select>
+  </div>
+  <div class="mb-3">
+    <label for="nota">Nota fiscal:</label>
+    <input type="number" class="form-control" id="nota" name="nota">
+  </div>
+  <hr>
+  <h2>Produtos Selecionados:</h2>
+  <ul id="produtos-lista" class="mb-3"></ul>
+  <hr>
+</div>
 
-        <hr>
-        <h2>Produtos Selecionados:</h2>
-        <ul id="produtos-lista"></ul>
-        <hr>
-
-        <button type="submit" id="cadastrar-entrada">Cadastrar Entrada</button>
-    </form>
-
+</form>
+<div class="text-center">
+<button type="submit" id="cadastrar-entrada" class="btn btn-primary">Cadastrar Entrada</button>
+</div>
+</div>
     <script>
 
         function order() {

@@ -20,27 +20,30 @@
 </head>
 
 <body onload="productInfo(productId)">
-  <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='listProduct.html'">Voltar</button>
-
-  <h1>Edição de Produto</h1>
+  <div style="position: absolute; top: 20px; left: 20px;">
+    <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='listProduct.html'">
+      <img src="../HTElements/icons/arrow-282-64.png">
+    </button>
+  </div>  
   <div class="mx-auto" style="width: 20%;">
-    <h2 class="text-center">Cadastro de Produtos</h1>
+    <h2 class="text-center">Editar Produto</h1>
     <form>
       <div class="mb-3">
-        <label for="descProduct">Descrição do produto:</label>
-        <input type="text" class="form-control" id="descProduct" name="nome">
+        <label for="descProduct" class="form-label">Descrição do produto:</label>
+        <input type="text" class="form-control" id="descProduct" name="descProduct">
       </div>
       <div class="mb-3">
-        <label for="codBarras">Código de barras:</label>
-        <input type="text" class="form-control" id="codBarras" name="email">
+        <label for="codBarras" class="form-label">Código de barras:</label>
+        <input type="number" class="form-control" id="codBarras" name="codBarras">
       </div>
       <div class="mb-3">
-        <label for="categories">Categoria:</label>
+        <label for="categories" class="form-label">Categoria:</label>
         <select class="form-select" id="categories" name="categories"></select>
       </div>
     </form>
-  <button type="submit" onclick="updateProduct()">Atualizar</button>
-
+    <div class="text-center">
+  <button type="submit" class="btn btn-primary" onclick="updateProduct()">Atualizar</button>
+</div>
 
   <script>
 
