@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width-device-width, initial-scale=1.0">
-  <title>Cadastro de Produto</title>
+  <title>Cadastro de Produtos</title>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,27 +15,37 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
     crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../HTElements/css/cadastro.css">
+    <link rel="stylesheet" href="../HTElements/css/custom.css">
 </head>
 
 <body onload="categories()">
-  <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='listProduct.html'">Voltar</button>
-  <h1>Cadastro</h1>
+  <div style="position: absolute; top: 20px; left: 20px;">
+    <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='listProduct.html'">
+      <img src="../HTElements/icons/arrow-282-64.png">
+    </button>
+  </div>  
+  
+  <div class="mx-auto" style="width: 20%;">
+  <h2 class="text-center">Cadastro de Produtos</h1>
   <form>
-    <div>
-      <label for="nome">Descrição do produto </label>
-      <input type="text" id="descProduct" name="nome">
+    <div class="mb-3">
+      <label for="descProduct">Descrição do produto:</label>
+      <input type="text" class="form-control" id="descProduct" name="nome">
     </div>
-    <div>
-      <label for="email">Código de barras</label>
-      <input type="text" id="codBarras" name="email">
+    <div class="mb-3">
+      <label for="codBarras">Código de barras:</label>
+      <input type="text" class="form-control" id="codBarras" name="email">
     </div>
-    <div>
-      <label for="categories">Categoria</label>
-      <select id="categories" name="categories"></select>
+    <div class="mb-3">
+      <label for="categories">Categoria:</label>
+      <select class="form-select" id="categories" name="categories"></select>
     </div>
   </form>
-  <button type="submit" onclick="enviarInformacoes()">Enviar</button>
-
+  <div class="text-center">
+  <button type="submit" class="btn btn-primary" onclick="enviarInformacoes()">Enviar</button>
+  </div>
+</div>
   <script>
 
     function categories() {
