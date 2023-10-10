@@ -24,11 +24,15 @@
 
 <body style="height:100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;" ,
     onload="LoadAlert(), checkAcess()">
+    <div class="cabecalho-titulo">
+        <h2 style=" position: fixed; top: 20px; left: 50%; transform: translateX(-50%); margin: 0; padding: 10px; color: #ffffff">
+            Gerenciador de Estoque</h2>
+        </div>
     <div style="position: absolute; top: 20px; left: 20px;">
-        <button type="button" class="botao-primario texto-botao" onclick="window.location.href='login.html'">
+        <button type="button" class="botao-sair texto-botao" onclick="window.location.href='login.html'">
             <img src="HTElements/icons/x-mark-3-32.png"> &nbsp; Sair
         </button>
-        <p id="mensagem" class="mensagem fixed-welcome"></p>
+        <p style="color: #ffffff;" id="mensagem" class="mensagem fixed-welcome"></p>
         <div>
             <div class="container">
                 <a id="lista-anchor" class="btn btn-warning fixed-button">
@@ -44,25 +48,24 @@
             <div class="backdrop"></div>
         </div>
     </div>
-    <h2 style=" position: fixed; top: 20px; left: 50%; transform: translateX(-50%); margin: 0; padding: 10px;">
-        Gerenciador de Estoque</h2>
+    
     <div class="container text-center">
-        <div id="testXd" class="container container-45">
+        <div class="container container-45">
             <div class="row">
                 <div class="col-md-4">
-                    <button class="botao-primario texto-botao mb-3" onclick="window.location.href='./Supplier/listSupplier.html'">
+                    <button id="botao1" class="botao-primario texto-botao mb-3" onclick="window.location.href='./Supplier/listSupplier.html'">
                         <img src="HTElements/icons/truck-128.png">
                         <p>FORNECEDORES</p>
                     </button>
                 </div>
                 <div class="col-md-4">
-                    <button class="botao-secundario texto-botao mb-3" onclick="window.location.href='listUsers.html'">
+                    <button id="botao2" class="botao-secundario texto-botao mb-3" onclick="window.location.href='listUsers.html'">
                         <img src="HTElements/icons/user-128.png">
                         <p>USUÁRIOS</p>
                     </button>
                 </div>
                 <div class="col-md-4">
-                    <button class="botao-primario mb-3 texto-botao" onclick="window.location.href='./Products/listProduct.html'">
+                    <button id="botao3" class="botao-primario mb-3 texto-botao" onclick="window.location.href='./Products/listProduct.html'">
                         <img src="HTElements/icons/cheese-128.png">
                         <p>PRODUTOS</p>
                     </button><br>
@@ -71,8 +74,8 @@
         </div>
         <div class="container container-45">
             <div class="row">
-                <div class="col-md-4" id="acessDenied">
-                    <button class="botao-secundario texto-botao mb-3" 
+                <div class="col-md-4">
+                    <button id="botao4" class="botao-secundario texto-botao mb-3" 
                         onclick="window.location.href='./Order/ListOrder.html'">
                         <img src="HTElements/icons/list-2-128.png">
                         <p style="color:white">PEDIDOS</p>
@@ -182,17 +185,27 @@
 
     function checkAcess() {
         const userType = localStorage.getItem("userType");
-        const botao = document.getElementById("testXd");
-        const order = document.getElementById("acessDenied");
-        const botEstoque = document.getElementById("botao-estoque");
-        const botRelatorios = document.getElementById("botao-relatorios");
+        const botao1 = document.getElementById("botao1");
+        const botao2 = document.getElementById("botao2");
+        const botao3 = document.getElementById("botao3");
+        const botao4 = document.getElementById("botao4");
 
         if (userType === "gerente") {
             order.style.visibility = "visible";
             botao.style.visibility = "visible";
         } else {
-            order.style.display = "none";
-            botao.style.display = "none";
+            botao1.style.backgroundColor = "#808080";
+            botao1.style.cursor = "not-allowed";
+            botao1.disabled = "true";
+            botao2.style.backgroundColor = "#808080";
+            botao2.style.cursor = "not-allowed";
+            botao2.disabled = "true";
+            botao3.style.backgroundColor = "#808080";
+            botao3.style.cursor = "not-allowed";
+            botao3.disabled = "true";
+            botao4.style.backgroundColor = "#808080";
+            botao4.style.cursor = "not-allowed";
+            botao4.disabled = "true";
         }
     }
 

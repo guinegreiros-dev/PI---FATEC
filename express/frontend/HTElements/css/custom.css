@@ -1,104 +1,124 @@
-
 body {
-    background-color: #FFECD1;
-    font-family: 'Gabarito', sans-serif;
+  background-color: #ffecd1;
+  font-family: "Gabarito", sans-serif;
 }
 .conteudo {
-    /* set a min-height to ensure that the content takes up at least the height of the viewport */
-    min-height: 80vh;
-    /* add padding-bottom equal to the height of the fixed element to make sure it doesn't overlap with the content */
-    padding-bottom: 30px;
-  }
-  
-  .fixar-embaixo {
-    position: fixed;
-    bottom: 0;
-    /* set a width to ensure that the element doesn't stretch to the full width of the screen */
-    width: 100%;
-    /* set a height for the fixed element */
-    height: auto;
-  }
+  /* set a min-height to ensure that the content takes up at least the height of the viewport */
+  min-height: 80vh;
+  /* add padding-bottom equal to the height of the fixed element to make sure it doesn't overlap with the content */
+  padding-bottom: 30px;
+}
 
-  .container-45 {
-    width: 45%;
-  }
+.fixar-embaixo {
+  position: fixed;
+  bottom: 0;
+  /* set a width to ensure that the element doesn't stretch to the full width of the screen */
+  width: 100%;
+  /* set a height for the fixed element */
+  height: auto;
+}
 
-  .container-top {
-    padding-bottom: 20px;
-  }
+.container-45 {
+  width: 45%;
+}
 
-  input[type=number] {
-    -moz-appearance: textfield;
-    appearance: textfield;
-  }
+.container-top {
+  padding-bottom: 20px;
+}
 
-  .fixed-button {
-    position: fixed;
-    top: 55px;
-    right: 20px;
-    z-index: 999;
-  }
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
 
-  .fixed-welcome {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 999;
-  }
-  .notification-bubble {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    padding: 4px 6px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #f00;
-    border-radius: 50%;
-  }
+.fixed-button {
+  position: fixed;
+  top: 55px;
+  right: 20px;
+  z-index: 999;
+}
 
-  #lista-popup {
-    position: absolute;
-    top: 40px;
-    right: 0;
-    z-index: 999;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
+.fixed-welcome {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+}
+.notification-bubble {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 4px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #f00;
+  border-radius: 50%;
+}
 
-  .botao-primario {
-    background-color: #d02424;
-    transition: all 0.3s ease;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-  }
+#lista-popup {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 999;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
 
-  .botao-primario:hover {
-    background-color: #de6666;
-  }
+.botao-sair {
+  background-color: #e60000;
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
 
-  .botao-secundario {
-    background-color: #BF195B;
-    transition: all 0.3s ease;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-  }
+.botao-sair:hover {
+  background-color: #ff4d4d;
+}
 
-  .botao-secundario:hover {
-    background-color: #d25e8c;
-  }
+.botao-primario {
+  background-color: #a7c7e7;
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
 
-  .texto-botao {
-    color: #fff;
-  }
+.botao-primario:hover {
+  background-color: #b9d2ec;
+}
 
-  .centered-buttons-container.centered {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+.botao-secundario {
+  background-color: #aec685;
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.botao-secundario:hover {
+  background-color: #daf7a6;
+}
+
+.texto-botao {
+  color: #fff;
+}
+
+.centered-buttons-container.centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.cabecalho-titulo {
+  position: fixed;
+  top: 0px;
+  margin: 0;
+  padding: 55px;
+  background-color: darkred;
+  width: 100%;
 }
