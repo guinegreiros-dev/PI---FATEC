@@ -1,7 +1,7 @@
 
-
 body {
-    background-color: #dadada;
+    background-color: #FFECD1;
+    font-family: 'Gabarito', sans-serif;
 }
 .conteudo {
     /* set a min-height to ensure that the content takes up at least the height of the viewport */
@@ -66,3 +66,39 @@ body {
     border: 1px solid #ccc;
     padding: 10px;
   }
+
+  .botao-primario {
+    background-color: #d02424;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .botao-primario:hover {
+    background-color: #de6666;
+  }
+
+  .botao-secundario {
+    background-color: #BF195B;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .botao-secundario:hover {
+    background-color: #d25e8c;
+  }
+
+  .texto-botao {
+    color: #fff;
+  }
+
+  .centered-buttons-container.centered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
