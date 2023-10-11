@@ -12,20 +12,30 @@
   <link rel="stylesheet" href="../HTElements/css/table.css">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="/express/frontend/editUser.html"></script>
+  <script src="../HTElements/js/bloqueios.js"></script>
 </head>
 <body onload="getAllProducts()">
-  <div style="position: absolute; top: 20px; left: 20px;">
-    <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='../options.html'">
-    <img src="../HTElements/icons/arrow-282-64.png">
-    </button>
-  </div>  
+  <div class="barra">
+    <div class="text-center pt-2">
+      <b style="font-size: 25px;">MENU</b>
+    </div>
+    <ul>
+      <li><a href="../options.html" class="link-menu">Inicial</a></li>
+      <li id="block1"><a href="../Supplier/ListSupplier.html" class="link-menu">Fornecedores</a></li>
+      <li id="block2"><a href="../listUsers.html" class="link-menu">Usuários</a></li>
+      <li id="block3"><a href="../Products/ListProduct.html" class="link-menu">Produtos</a></li>
+      <li id="block4"><a href="../order/ListOrder.html" class="link-menu">Pedidos</a></li>
+      <li><a href="../Stock/ListStock.html" class="link-menu">Estoque</a></li>
+      <li><a href="../relatorio/index.html" class="link-menu">Relatórios</a></li>
+  </ul>
+</div>
   <div class="container-fluid mx-auto d-flex flex-column" style="width: 80%; margin: auto;">
     <h1 class="text-center justify-content-center my-3">Lista de Produtos</h1>
     <div class="d-flex justify-content-between">
-      <a class='btn btn-primary btn-sm' href='addProduct.html'>
+      <a class='botao-adicionar' href='addProduct.html'>
         <img src="../HTElements/icons/plus-5-24.png" style="margin-right: 10px;">Novo Produto
       </a>
-      <a class='btn btn-primary btn-sm' href='../Category/ListCategory.html'>
+      <a class='botao-adicionar' href='../Category/ListCategory.html'>
         <img src="../HTElements/icons/list-2-128.png" style="margin-right: 10px; height: 24px; width: auto;">Categoria
       </a>
     </div>

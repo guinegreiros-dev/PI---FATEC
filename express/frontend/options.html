@@ -25,17 +25,17 @@
 <body style="height:100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;" ,
     onload="LoadAlert(), checkAcess()">
     <div class="cabecalho-titulo">
-        <h2 style=" position: fixed; top: 20px; left: 50%; transform: translateX(-50%); margin: 0; padding: 10px; color: #ffffff">
+        <h2 class="texto-cabecalho" style=" position: fixed; top: 20px; left: 50%; transform: translateX(-50%); margin: 0; padding: 10px;">
             Gerenciador de Estoque</h2>
         </div>
     <div style="position: absolute; top: 20px; left: 20px;">
         <button type="button" class="botao-sair texto-botao" onclick="window.location.href='login.html'">
             <img src="HTElements/icons/x-mark-3-32.png"> &nbsp; Sair
         </button>
-        <p style="color: #ffffff;" id="mensagem" class="mensagem fixed-welcome"></p>
+        <p id="mensagem" class="mensagem fixed-welcome texto-cabecalho"></p>
         <div>
             <div class="container">
-                <a id="lista-anchor" class="btn btn-warning fixed-button">
+                <a id="lista-anchor" class="botao-aviso fixed-button">
                     <img src="HTElements/icons/warning-5-32.png" alt="">
                     <span id="numNotif" class="notification-bubble">!</span>
                 </a>
@@ -48,6 +48,7 @@
             <div class="backdrop"></div>
         </div>
     </div>
+    
     
     <div class="container text-center">
         <div class="container container-45">

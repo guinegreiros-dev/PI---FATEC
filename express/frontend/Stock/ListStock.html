@@ -20,18 +20,30 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.2/dist/purify.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../HTElements/js/barra.js"></script>
+  <script src="../HTElements/js/bloqueios.js"></script>
 </head>
 
-<body onload="getStock()">
-  <div style="position: absolute; top: 20px; left: 20px;">
-    <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='../options.html'">
-    <img src="../HTElements/icons/arrow-282-64.png">
-    </button>
-  </div>
+<body onload="getStock(), checkAccess()">
+  <div class="barra">
+    <div class="text-center pt-2">
+      <b style="font-size: 25px;">MENU</b>
+    </div>
+    <ul>
+      <li><a href="../options.html" class="link-menu">Inicial</a></li>
+      <li id="block1"><a href="../Supplier/ListSupplier.html" class="link-menu">Fornecedores</a></li>
+      <li id="block2"><a href="../listUsers.html" class="link-menu">Usuários</a></li>
+      <li id="block3"><a href="../Products/ListProduct.html" class="link-menu">Produtos</a></li>
+      <li id="block4"><a href="../order/ListOrder.html" class="link-menu">Pedidos</a></li>
+      <li><a href="../Stock/ListStock.html" class="link-menu">Estoque</a></li>
+      <li><a href="../relatorio/index.html" class="link-menu">Relatórios</a></li>
+  </ul>
+</div>
   <div class="container-fluid mx-auto d-flex flex-column" style="width: 80%;">
     <h1 class="text-center justify-content-center">Estoque</h1>
     <div class="d-flex">
-      <a id="AddUser" class='btn btn-primary btn-sm' href='EntryStock.html'>
+      <a id="AddUser" class='botao-adicionar' href='EntryStock.html'>
         <img src="../HTElements/icons/plus-5-24.png">
         Entrada de estoque</a>
     </div>
