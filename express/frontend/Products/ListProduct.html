@@ -1,87 +1,111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="br">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cadastro de Produto</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../HTElements/css/custom.css">
-  <link rel="stylesheet" href="../HTElements/css/table.css">
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="/express/frontend/editUser.html"></script>
-  <script src="../HTElements/js/bloqueios.js"></script>
-</head>
-<body onload="getAllProducts(), CheckAcess()">
-  <div class="barra">
-    <div class="text-center pt-2">
-      <b style="font-size: 25px;">MENU</b>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cadastro de Produto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../HTElements/css/custom.css" />
+    <link rel="stylesheet" href="../HTElements/css/table.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/express/frontend/editUser.html"></script>
+    <script src="../HTElements/js/bloqueios.js"></script>
+  </head>
+  <body onload="getAllProducts(), CheckAcess()">
+    <div class="barra">
+      <div class="text-center pt-2">
+        <img src="../HTElements/icons/logo_1.png" style="width: 80%" />
+      </div>
+      <ul>
+        <li><a href="../options.html" class="link-menu">Inicial</a></li>
+        <li id="block1">
+          <a href="../Supplier/ListSupplier.html" class="link-menu"
+            >Fornecedores</a
+          >
+        </li>
+        <li id="block2">
+          <a href="../listUsers.html" class="link-menu">Usuários</a>
+        </li>
+        <li id="block3">
+          <a href="../Products/ListProduct.html" class="link-menu">Produtos</a>
+        </li>
+        <li id="block4">
+          <a href="../order/ListOrder.html" class="link-menu">Pedidos</a>
+        </li>
+        <li><a href="../Stock/ListStock.html" class="link-menu">Estoque</a></li>
+        <li>
+          <a href="../relatorio/index.html" class="link-menu">Relatórios</a>
+        </li>
+      </ul>
     </div>
-    <ul>
-      <li><a href="../options.html" class="link-menu">Inicial</a></li>
-      <li id="block1"><a href="../Supplier/ListSupplier.html" class="link-menu">Fornecedores</a></li>
-      <li id="block2"><a href="../listUsers.html" class="link-menu">Usuários</a></li>
-      <li id="block3"><a href="../Products/ListProduct.html" class="link-menu">Produtos</a></li>
-      <li id="block4"><a href="../order/ListOrder.html" class="link-menu">Pedidos</a></li>
-      <li><a href="../Stock/ListStock.html" class="link-menu">Estoque</a></li>
-      <li><a href="../relatorio/index.html" class="link-menu">Relatórios</a></li>
-  </ul>
-</div>
-  <div class="container-fluid mx-auto d-flex flex-column" style="width: 80%; margin: auto;">
-    <h1 class="text-center justify-content-center my-3">Lista de Produtos</h1>
-    <div class="d-flex justify-content-between">
-      <a class='botao-adicionar' href='addProduct.html'>
-        <img src="../HTElements/icons/plus-5-24.png" style="margin-right: 10px;">Novo Produto
-      </a>
-      <a class='botao-adicionar' href='../Category/ListCategory.html'>
-        <img src="../HTElements/icons/list-2-128.png" style="margin-right: 10px; height: 24px; width: auto;">Categoria
-      </a>
+    <div
+      class="container-fluid mx-auto d-flex flex-column"
+      style="width: 80%; margin: auto"
+    >
+      <h1 class="text-center justify-content-center my-3">Lista de Produtos</h1>
+      <div class="d-flex justify-content-between">
+        <a class="botao-adicionar" href="addProduct.html">
+          <img
+            src="../HTElements/icons/plus-5-24.png"
+            style="margin-right: 10px"
+          />Novo Produto
+        </a>
+        <a class="botao-adicionar" href="../Category/ListCategory.html">
+          <img
+            src="../HTElements/icons/list-2-128.png"
+            style="margin-right: 10px; height: 24px; width: auto"
+          />Categoria
+        </a>
+      </div>
+      <br />
+      <table class="table-responsive">
+        <thead>
+          <tr class="text-center">
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Código de barras</th>
+            <th>Categoria</th>
+            <th>Status</th>
+            <th>Editar</th>
+            <th>Inativar</th>
+            <th>Ativar</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-corpo">
+          <!-- Conteúdo da tabela -->
+        </tbody>
+      </table>
     </div>
-    <br>
-    <table class="table-responsive" >
-      <thead>
-        <tr class="text-center">
-          <th>ID</th>
-          <th>Descrição</th>
-          <th>Código de barras</th>
-          <th>Categoria</th>
-          <th>Status</th>
-          <th>Editar</th>
-          <th>Inativar</th>
-          <th>Ativar</th>
-        </tr>
-      </thead>
-      <tbody id="tabela-corpo">
-        <!-- Conteúdo da tabela -->
-      </tbody>
-    </table>
-  </div>
-  <script>
-    function getAllProducts() {
+    <script>
+      function getAllProducts() {
+        var config = {
+          method: "get",
+          maxBodyLength: Infinity,
+          url: "http://localhost:8080/product",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        };
 
-      var config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url: 'http://localhost:8080/product',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-      };
+        axios(config)
+          .then(function (response) {
+            const data = response.data;
 
-      axios(config)
-        .then(function (response) {
+            console.log(data);
 
-          const
-            data = response.data;
+            let tableFront = document.querySelector("#tabela-corpo");
 
-            console.log(data)
-
-          let tableFront = document.querySelector("#tabela-corpo");
-
-          data.forEach(function (product) {
-            tableFront.innerHTML += `
+            data.forEach(function (product) {
+              tableFront.innerHTML += `
           <tr>
             <td>${product.ID_PROD}</td>
             <td>${product.DESC_PROD}</td>
@@ -93,60 +117,55 @@
             <td><a class='btn btn-success btn-sm' onclick="enableProduct('${product.ID_PROD}')"'><img src='../HTElements/icons/power-24.png'></a></td>
           </tr>
         `;
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+            alert("Algo deu errado.");
           });
+      }
 
-        })
-        .catch(function (error) {
-          console.log(error);
-          alert("Algo deu errado.");
-        });
-    }
+      function deleteProduct(productId) {
+        var config = {
+          method: "delete",
+          maxBodyLength: Infinity,
+          url: `http://localhost:8080/product/${productId}`,
+          headers: {},
+        };
 
-    function deleteProduct(productId) {
+        axios(config)
+          .then(function (response) {
+            alert(JSON.stringify(response.data));
+            location.reload();
+          })
+          .catch(function (error) {
+            alert(error);
+          });
+      }
 
-      var config = {
-        method: 'delete',
-        maxBodyLength: Infinity,
-        url: `http://localhost:8080/product/${productId}`,
-        headers: {}
-      };
+      function enableProduct(productId) {
+        var config = {
+          method: "post",
+          maxBodyLength: Infinity,
+          url: `http://localhost:8080/product/${productId}`,
+          headers: {},
+        };
 
-      axios(config)
-        .then(function (response) {
-          alert(JSON.stringify(response.data));
-          location.reload()
-        })
-        .catch(function (error) {
-          alert(error);
-        });
-    }
+        axios(config)
+          .then(function (response) {
+            alert(JSON.stringify(response.data));
+            location.reload();
+          })
+          .catch(function (error) {
+            alert(error);
+          });
+      }
 
-    function enableProduct(productId) {
+      function editProduct(prodId) {
+        localStorage.setItem("prodId", prodId);
 
-      var config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: `http://localhost:8080/product/${productId}`,
-        headers: {}
-      };
-
-      axios(config)
-        .then(function (response) {
-          alert(JSON.stringify(response.data));
-          location.reload()
-        })
-        .catch(function (error) {
-          alert(error);
-        });
-    }
-
-    function editProduct(prodId){
-
-      localStorage.setItem("prodId", prodId);
-
-      window.location.href = `editProduct.html`
-    }
-  </script>
-</body>
-
+        window.location.href = `editProduct.html`;
+      }
+    </script>
+  </body>
 </html>
