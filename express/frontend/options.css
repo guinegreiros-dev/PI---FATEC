@@ -1,47 +1,47 @@
-  #lista-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 999;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-    display: none;
-  }
-  #lista-popup ul {
-    list-style: none;
-    padding: 0;
-  }
-  #lista-popup ul li {
-    margin-bottom: 10px;
-  }
-  #lista-popup button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-  }
-  .backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 998;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease-in-out;
-  }
-   .backdrop.active {
-    opacity: 1;
-    visibility: visible;
-   }
+#lista-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  display: none;
+}
+#lista-popup ul {
+  list-style: none;
+  padding: 0;
+}
+#lista-popup ul li {
+  margin-bottom: 10px;
+}
+#lista-popup button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out;
+}
+.backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}

@@ -1,99 +1,122 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width-device-width, initial-scale=1.0" />
+    <title>Cadastro de Usuário</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="HTElements/css/custom.css" />
+    <link rel="stylesheet" href="HTElements/css/cadastro.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width-device-width, initial-scale=1.0">
-  <title>Cadastro de Usuário</title>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-  <link rel="stylesheet" href="HTElements/css/custom.css">
-  <link rel="stylesheet" href="HTElements/css/cadastro.css">
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-    crossorigin="anonymous"></script>
-</head>
+  <body>
+    <div style="position: absolute; top: 20px; left: 20px">
+      <button
+        type="button"
+        class="btn btn-danger btn-sm"
+        onclick="window.location.href='listUsers.html'"
+      >
+        <img src="HTElements/icons/arrow-282-64.png" />
+      </button>
+    </div>
 
-<body>
-  <div style="position: absolute; top: 20px; left: 20px;">
-    <button type="button" class="btn btn-danger btn-sm" onclick="window.location.href='listUsers.html'">
-      <img src="HTElements/icons/arrow-282-64.png">
-    </button>
-  </div>
+    <div class="mx-auto" style="width: 20%">
+      <h2 class="text-center">Cadastro de Usuário</h2>
+      <form>
+        <div class="mb-3">
+          <label for="loginUser" class="form-label">Login de acesso:</label>
+          <input type="text" class="form-control" id="loginUser" name="nome" />
+        </div>
+        <div class="mb-3">
+          <label for="nomeUser" class="form-label">Nome:</label>
+          <input type="text" class="form-control" id="nomeUser" name="email" />
+        </div>
+        <div class="mb-3">
+          <label for="passwordUser" class="form-label">Password:</label>
+          <input
+            type="password"
+            class="form-control"
+            id="passwordUser"
+            name="nome"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="typeUserId" class="form-label">Tipo do usuário:</label>
+          <select class="form-select" id="typeUserId" name="typeUser">
+            <option value="">Selecione um tipo de usuário</option>
+            <option value="Gerente">Gerente</option>
+            <option value="Funcionário">Funcionário</option>
+          </select>
+        </div>
+        <div class="text-center">
+          <button
+            type="submit"
+            class="botao-adicionar"
+            onclick="enviarInformacoes()"
+          >
+            Enviar
+          </button>
+        </div>
+      </form>
+    </div>
 
-  <div class="mx-auto" style="width: 20%;">
-    <h2 class="text-center">Cadastro de Usuário</h2>
-    <form>
-      <div class="mb-3">
-        <label for="loginUser" class="form-label">Login de acesso:</label>
-        <input type="text" class="form-control" id="loginUser" name="nome">
-      </div>
-      <div class="mb-3">
-        <label for="nomeUser" class="form-label">Nome:</label>
-        <input type="text" class="form-control" id="nomeUser" name="email">
-      </div>
-      <div class="mb-3">
-        <label for="passwordUser" class="form-label">Password:</label>
-        <input type="password" class="form-control" id="passwordUser" name="nome">
-      </div>
-      <div class="mb-3">
-        <label for="typeUserId" class="form-label">Tipo do usuário:</label>
-        <select class="form-select" id="typeUserId" name="typeUser">
-          <option value="">Selecione um tipo de usuário</option>
-          <option value="Gerente">Gerente</option>
-          <option value="Funcionário">Funcionário</option>
-        </select>
-      </div>
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary" onclick="enviarInformacoes()">Enviar</button>
-      </div>
-    </form>
-  </div>
+    <script>
+      function enviarInformacoes() {
+        let loginUser = document.getElementById("loginUser").value,
+          nomeUser = document.getElementById("nomeUser").value,
+          passwordUser = document.getElementById("passwordUser").value,
+          typeUserId = document.getElementById("typeUserId").value;
 
-  <script>
-    function enviarInformacoes() {
-      let
-        loginUser = document.getElementById("loginUser").value,
-        nomeUser = document.getElementById("nomeUser").value,
-        passwordUser = document.getElementById("passwordUser").value,
-        typeUserId = document.getElementById("typeUserId").value;
+        if (typeUserId === "Gerente") typeUserId = 1;
+        if (typeUserId === "Funcionário") typeUserId = 2;
 
-      if (typeUserId === "Gerente") typeUserId = 1;
-      if (typeUserId === "Funcionário") typeUserId = 2;
-
-      var data = Qs.stringify({
-        loginUser: loginUser,
-        nomeUser: nomeUser,
-        passwordUser: passwordUser,
-        typeUserId: typeUserId
-      });
-      var config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'http://localhost:8080/user/newUser',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        data: data
-      };
-
-      axios(config)
-        .then(function (response) {
-          console.log(JSON.stringify(response.data));
-          alert(JSON.stringify(response.data));
-          window.location.href = "listUsers.html";
-        })
-        .catch(function (error) {
-          console.log(error);
-          alert("Algo deu errado.");
+        var data = Qs.stringify({
+          loginUser: loginUser,
+          nomeUser: nomeUser,
+          passwordUser: passwordUser,
+          typeUserId: typeUserId,
         });
-    }
-  </script>
-</body>
+        var config = {
+          method: "post",
+          maxBodyLength: Infinity,
+          url: "http://localhost:8080/user/newUser",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          data: data,
+        };
 
+        axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            alert(JSON.stringify(response.data));
+            window.location.href = "listUsers.html";
+          })
+          .catch(function (error) {
+            console.log(error);
+            alert("Algo deu errado.");
+          });
+      }
+    </script>
+  </body>
 </html>

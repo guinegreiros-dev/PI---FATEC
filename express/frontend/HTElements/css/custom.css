@@ -1,68 +1,197 @@
-
-
 body {
-    background-color: #dadada;
+  background-color: #fff9b0;
+  font-family: "Gabarito", sans-serif;
 }
 .conteudo {
-    /* set a min-height to ensure that the content takes up at least the height of the viewport */
-    min-height: 80vh;
-    /* add padding-bottom equal to the height of the fixed element to make sure it doesn't overlap with the content */
-    padding-bottom: 30px;
-  }
-  
-  .fixar-embaixo {
-    position: fixed;
-    bottom: 0;
-    /* set a width to ensure that the element doesn't stretch to the full width of the screen */
-    width: 100%;
-    /* set a height for the fixed element */
-    height: auto;
-  }
+  /* set a min-height to ensure that the content takes up at least the height of the viewport */
+  min-height: 80vh;
+  /* add padding-bottom equal to the height of the fixed element to make sure it doesn't overlap with the content */
+  padding-bottom: 30px;
+}
 
-  .container-45 {
-    width: 45%;
-  }
+.fixar-embaixo {
+  position: fixed;
+  bottom: 0;
+  /* set a width to ensure that the element doesn't stretch to the full width of the screen */
+  width: 100%;
+  /* set a height for the fixed element */
+  height: auto;
+}
 
-  .container-top {
-    padding-bottom: 20px;
-  }
+.container-45 {
+  width: 45%;
+}
 
-  input[type=number] {
-    -moz-appearance: textfield;
-    appearance: textfield;
-  }
+.container-top {
+  padding-bottom: 20px;
+}
 
-  .fixed-button {
-    position: fixed;
-    top: 55px;
-    right: 20px;
-    z-index: 999;
-  }
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
 
-  .fixed-welcome {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 999;
-  }
-  .notification-bubble {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    padding: 4px 6px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #f00;
-    border-radius: 50%;
-  }
+.fixed-button {
+  position: fixed;
+  top: 55px;
+  right: 20px;
+  z-index: 999;
+}
 
-  #lista-popup {
-    position: absolute;
-    top: 40px;
-    right: 0;
-    z-index: 999;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
+.fixed-welcome {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+}
+.notification-bubble {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 4px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #f00;
+  border-radius: 50%;
+}
+
+#lista-popup {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 999;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.botao-sair {
+  background-color: #e60000;
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.botao-sair:hover {
+  background-color: #ff4d4d;
+}
+
+.botao-aviso {
+  background-color: orange;
+  transition: all 0.3s ease;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.botao-aviso:hover {
+  background-color: #ffac82;
+}
+
+.botao-primario {
+  background-color: #ff577f;
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.botao-primario:hover {
+  background-color: #00a880;
+}
+
+.botao-secundario {
+  background-color: #ff884b;
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.botao-secundario:hover {
+  background-color: #0077b4;
+}
+
+.texto-botao {
+  color: #fff;
+}
+
+.centered-buttons-container.centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.cabecalho-titulo {
+  position: fixed;
+  top: 0px;
+  margin: 0;
+  padding: 55px;
+  background-color: #ffd384;
+  width: 100%;
+}
+
+.cabecalho-login {
+  position: fixed;
+  top: 0px;
+  margin: 0;
+  padding: 30px;
+  width: 100%;
+}
+
+.texto-cabecalho {
+  color: #171718;
+}
+
+.barra {
+  width: 175px;
+  height: 100%;
+  background-color: #FFD384;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.link-menu {
+  font-size: 18px;
+  color: black;
+  text-decoration: none;
+  transition: all, 0.3s;
+}
+
+.link-menu:hover {
+  color:#494949
+}
+
+.botao-adicionar {
+    background-color: #ff577f;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.botao-adicionar:hover{
+  background-color: #ff7c9b;
+  color: white;
+}
+
+.logo-inicial {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+.img-logo-inicial {
+  width: 200px;
+  height: auto;
+  opacity: 60%;
+}

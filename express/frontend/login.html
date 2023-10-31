@@ -1,136 +1,191 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width-device-width, initial-scale=1.0" />
+    <title>Login</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link href="HTElements/css/custom.css" rel="stylesheet" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="login.css" />
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width-device-width, initial-scale=1.0">
-	<title>Login</title>
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/qs@6.9.4/dist/qs.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-	<link href="HTElements/css/custom.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-		integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-		crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="login.css">
-</head>
+  <body
+    style="
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    "
+  >
+    <div class="cookies-banner">
+      <p>
+        Leia os termos de privacidade e uso de dados para saber quais dados seus
+        utilizamos em nosso sistema. Se você prosseguir, você automaticamente
+        aceita os cookies que usamos para funcionamento do site.<a
+          href="#"
+          onclick="abrirPopup()"
+          >Termos de privacidade</a
+        >
+      </p>
+      <button class="cookies-btn" onclick="aceitarCookies()">Aceitar</button>
+    </div>
+    <div id="popup" class="popup">
+      <span class="popup-close" onclick="fecharPopup()">&times;</span>
+      <h2>Leia com atenção!</h2>
+      <h4>Cookies</h4>
+      <p>
+        Nosso sistema utiliza cookies para o seu funcionamento, estes por sua
+        vez são feitos para autentica-lo, sendo assim necessários para que você
+        possa utilizar o site de forma consistente, sendo estes criptografados
+        assim não expostos a olho nu. Ao utilizar o sistema você aceita o uso e
+        armazenamento destes cookies, sendo claro a sua utilização.
+      </p>
+      <h4>Privacidade de dados</h4>
+      <p>
+        É de extrema importância saber para quê e quem está tendo acesso ao seus
+        dados, e por estarmos de acordo com a lei LGPD e suas restrições não
+        utilizamos e nem pedimos dados além dos necessários para o bom
+        funcionamento do site e suas funções. Nosso sistema e base de dados é
+        protegida, mantendo informações sigilosas de forma segura e não
+        compartilhando com terceiros não autorizados. Ao utilizar o sistema você
+        aceita que os dados básicos para o funcionamento sejam armazenados
+        dentro da plataforma.
+      </p>
+    </div>
+    <div
+      class="text-center cabecalho-login"
+    >
+      <h2>Gestão de Estoque</h2>
+    </div>
+    <div class="container w-25">
+      <div class="text-center pb-3">
+        <img class="img" style="width: 300px; height: auto;" src="HTElements/icons/logo_2.png" />
+      </div>
+      <form>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="loginUser"
+            name="nome"
+            placeholder="Usuário"
+          />
+          <br />
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            id="passwordUser"
+            name="nome"
+            placeholder="Senha"
+          />
+          <br />
+        </div>
+      </form>
+      <div class="text-center">
+        <div class="btn btn-success">
+          <img class="img-fluid" src="HTElements/icons/arrow-24-24.png" />
+          <button
+            type="submit"
+            class="btn"
+            onclick="enviarInformacoes()"
+            style="color: white"
+          >
+            LOGIN
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function enviarInformacoes() {
+        const loginUser = document.getElementById("loginUser").value,
+          passwordUser = document.getElementById("passwordUser").value;
 
-<body style="height: 100vh; display: flex; justify-content: center; align-items: center;">
-	<div class="cookies-banner">
-		<p>Leia os termos de privacidade e uso de dados para saber quais dados seus utilizamos em nosso sistema. Se você
-			prosseguir, você automaticamente aceita os cookies que usamos para funcionamento do site.<a href="#" onclick="abrirPopup()">Termos de
-				privacidade</a></p>
-		<button class="cookies-btn" onclick="aceitarCookies()">Aceitar</button>
-	</div>
-	<div id="popup" class="popup">
-		<span class="popup-close" onclick="fecharPopup()">&times;</span>
-		<h2>Leia com atenção!</h2>
-		<h4>Cookies</h4>
-		<p>Nosso sistema utiliza cookies para o seu funcionamento, estes por sua vez são feitos para autentica-lo, sendo assim necessários para que você possa utilizar o site de forma consistente, sendo estes criptografados assim não expostos a olho nu. Ao utilizar o sistema você aceita o uso e armazenamento destes cookies, sendo claro a sua utilização.</p>
-		<h4>Privacidade de dados</h4>
-		<p>É de extrema importância saber para quê e quem está tendo acesso ao seus dados, e por estarmos de acordo com a lei LGPD e suas restrições não utilizamos e nem pedimos dados além dos necessários para o bom funcionamento do site e suas funções. Nosso sistema e base de dados é protegida, mantendo informações sigilosas de forma segura e não compartilhando com terceiros não autorizados. Ao utilizar o sistema você aceita que os dados básicos para o funcionamento sejam armazenados dentro da plataforma.</p>
-	</div>
-	<div class="text-center"
-		style="position: fixed; top: 0px; margin: 0; padding: 10px; background-color: darkred; width: 100%;">
-		<h2 style="color:white">Real Manage</h2>
-	</div>
-	<div class="container w-25" style="padding-top: 3%">
-		<div class="text-center pb-3">
-			<img class="img-fluid" src="HTElements/icons/shop-512.png">
-		</div>
-		<form>
-			<div class="form-group">
-				<input type="text" class="form-control" id="loginUser" name="nome" placeholder="Usuário">
-				<br>
-			</div>
-			<div class="form-group">
-				<input type="password" class="form-control" id="passwordUser" name="nome" placeholder="Senha">
-				<br>
-			</div>
-		</form>
-		<div class="text-center">
-			<div class="btn btn-success">
-				<img class="img-fluid" src="HTElements/icons/arrow-24-24.png">
-				<button type="submit" class="btn" onclick="enviarInformacoes()" style="color: white">LOGIN</button>
-			</div>
-		</div>
-	</div>
-	<script>
-		function enviarInformacoes() {
-			const
-				loginUser = document.getElementById("loginUser").value,
-				passwordUser = document.getElementById("passwordUser").value;
+        var data = Qs.stringify({
+          loginUser: loginUser,
+          passwordUser: passwordUser,
+        });
+        var config = {
+          method: "post",
+          maxBodyLength: Infinity,
+          url: "http://localhost:8080/user/login",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          data: data,
+        };
 
-			var data = Qs.stringify({
-				loginUser: loginUser,
-				passwordUser: passwordUser
-			});
-			var config = {
-				method: 'post',
-				maxBodyLength: Infinity,
-				url: 'http://localhost:8080/user/login',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				},
-				data: data
-			};
+        axios(config)
+          .then(function (response) {
+            if (response.data === "Falha no login.") {
+              alert(JSON.stringify(response.data));
+            } else {
+              localStorage.setItem("userNameLogged", response.data.userName);
+              localStorage.setItem("userType", response.data.userType);
+              localStorage.setItem("userLogged", response.data.userId);
+              window.location.href = "options.html";
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+            alert(error);
+          });
+      }
 
-			axios(config)
-				.then(function (response) {
+      function aceitarCookies() {
+        // Configurar um cookie de aceitação com validade de 30 dias
+        var dataExpiracao = new Date();
+        dataExpiracao.setDate(dataExpiracao.getDate() + 30);
+        document.cookie =
+          "cookies-aceitos=true; expires=" +
+          dataExpiracao.toUTCString() +
+          "; path=/";
 
-					if (response.data === "Falha no login.") {
+        // Remover o banner de cookies
+        var banner = document.querySelector(".cookies-banner");
+        banner.remove();
+      }
 
-						alert(JSON.stringify(response.data));
-					} else {
+      function abrirPopup() {
+        var popup = document.getElementById("popup");
+        popup.style.display = "block";
+      }
 
-						localStorage.setItem("userNameLogged", response.data.userName);
-						localStorage.setItem("userType", response.data.userType);
-						localStorage.setItem("userLogged", response.data.userId);
-						window.location.href = "options.html";
-					}
+      function fecharPopup() {
+        var popup = document.getElementById("popup");
+        popup.style.display = "none";
+      }
 
-				})
-				.catch(function (error) {
-					console.log(error);
-					alert(error);
-				});
-		}
+      function verificarCookiesAceitos() {
+        if (document.cookie.indexOf("cookies-aceitos=true") > -1) {
+          // Cookies já foram aceitos
+          var banner = document.querySelector(".cookies-banner");
+          banner.remove();
+        }
+      }
 
-		function aceitarCookies() {
-			// Configurar um cookie de aceitação com validade de 30 dias
-			var dataExpiracao = new Date();
-			dataExpiracao.setDate(dataExpiracao.getDate() + 30);
-			document.cookie = 'cookies-aceitos=true; expires=' + dataExpiracao.toUTCString() + '; path=/';
-
-			// Remover o banner de cookies
-			var banner = document.querySelector('.cookies-banner');
-			banner.remove();
-		}
-
-		function abrirPopup() {
-			var popup = document.getElementById('popup');
-			popup.style.display = 'block';
-		}
-
-		function fecharPopup() {
-			var popup = document.getElementById('popup');
-			popup.style.display = 'none';
-		}
-
-		function verificarCookiesAceitos() {
-			if (document.cookie.indexOf('cookies-aceitos=true') > -1) {
-				// Cookies já foram aceitos
-				var banner = document.querySelector('.cookies-banner');
-				banner.remove();
-			}
-		}
-
-		verificarCookiesAceitos();
-	</script>
-</body>
-
+      verificarCookiesAceitos();
+    </script>
+  </body>
 </html>

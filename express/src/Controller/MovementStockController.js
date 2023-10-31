@@ -141,7 +141,7 @@ class Stock extends StockModel {
 
             infos.forEach(element => {
 
-                const dataAtual = new Date("2023-06-21");
+                const dataAtual = new Date();
 
                 if (element.DAT_VALI) {
 
@@ -150,13 +150,16 @@ class Stock extends StockModel {
                     dateMinimun.setDate(dateMinimun.getDate() - element.DIAS_AVISO);
 
                     if(dataAtual >= dateMinimun){
+                        let message;
 
-                        let message = { response: `O produto ${element.DESC_PROD} do pedido ${element.orderId} está próximo do vencimento.` };
+                        if(element.DAT_VALI < dataAtual) {
+                            message = { response: `O produto ${element.DESC_PROD} do pedido ${element.orderId} está vencido.` };
+                        } else {
+                            message = { response: `O produto ${element.DESC_PROD} do pedido ${element.orderId} está próximo do vencimento.` };
+                        }
 
                         result.push(message); 
-
                     }
-
                 };
 
                 if (element.QTD_MOV <= element.QUANT_MINIMA) {
