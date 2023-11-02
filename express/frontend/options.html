@@ -92,7 +92,7 @@
                     </button>
                 </div>
                 <div id="botao-relatorios" class="col-md-4">
-                    <button class="botao-secundario texto-botao mb-3" onclick="window.location.href='./relatorio/index.html'">
+                    <button class="botao-secundario texto-botao mb-3" onclick="openNewWindow()">
                         <img src="HTElements/icons/report-3-128.png">
                         <p>RELATÓRIOS</p>
                     </button>
@@ -212,6 +212,11 @@
             botao4.disabled = "true";
         }
     }
+
+    function openNewWindow() {
+    window.open("https://app.powerbi.com/groups/me/reports/e6bcf351-d41a-4ddc-9217-5451ba1e10e3/ReportSection?experience=power-bi", "_blank");
+}
+
 
 </script>
 
