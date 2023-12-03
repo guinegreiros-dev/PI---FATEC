@@ -79,6 +79,7 @@ class Stock {
         INNER JOIN tb_pedidos ON tb_pedidos.ID_PED = tb_estoques_mov.orderId
         INNER JOIN tb_produtos ON tb_produtos.ID_PROD = tb_estoques_mov.productId
         WHERE QTD_MOV > 0
+        ORDER BY ID_ESTOQUE_MOV DESC
         `);
 
         return rows

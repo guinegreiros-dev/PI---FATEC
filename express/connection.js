@@ -4,7 +4,7 @@ module.exports = mysql.createConnection({
 
     host: "localhost",
     user: "root",
-    password: "1234",
+    password: "admin",
     port:"3306",
     database:"gestao_estoque"
 });
